@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bisiolm2xfwd4"]
+
+[ext_resource type="Texture2D" uid="uid://bwa3rayjiv4c1" path="res://icon.svg" id="1_b1qd1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gjvie"]
+radius = 20.025
+
+[node name="Person" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(20, 20)
+scale = Vector2(0.304688, 0.304688)
+texture = ExtResource("1_b1qd1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(20, 20)
+shape = SubResource("CircleShape2D_gjvie")
