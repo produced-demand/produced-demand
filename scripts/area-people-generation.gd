@@ -2,7 +2,7 @@ extends Node2D
 
 var person_scene = preload("res://person.tscn")
 
-var interval = 200
+@export var interval = 800
 var last_ran = Time.get_ticks_msec()
 
 
