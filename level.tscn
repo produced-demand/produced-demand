@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dfwyjyjoj3g8t"]
+[gd_scene load_steps=3 format=3 uid="uid://dfwyjyjoj3g8t"]
 
 [ext_resource type="PackedScene" uid="uid://b8c1317ynarpe" path="res://area.tscn" id="1_eo7to"]
+[ext_resource type="Script" path="res://scripts/camera_movement.gd" id="2_wg34b"]
 
 [node name="level" type="Node2D"]
 position = Vector2(397, 83)
@@ -13,3 +14,6 @@ position = Vector2(121, -79)
 
 [node name="Area2D2" parent="." instance=ExtResource("1_eo7to")]
 position = Vector2(-136, -79)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_wg34b")
