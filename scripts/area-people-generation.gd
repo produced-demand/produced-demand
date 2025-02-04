@@ -2,26 +2,24 @@ extends Node2D
 
 var person_scene = preload("res://person.tscn")
 
-@export var interval = 1600
+@export var interval = 2000
 var last_ran = Time.get_ticks_msec()
 
 
 func _ready() -> void:
-	print("area created")
+	pass
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var now = Time.get_ticks_msec()
 	if now - last_ran > interval:
 		last_ran = now
 		generate_person()
-	pass
 
 
 func generate_person():
 	var person = person_scene.instantiate()
 
 	var shape = get_tree().get_root().get_node("level").get_node("Area2D").get_node("CollisionShape2D").shape.get_rect().size
-	var position = get_tree().get_root().get_node("level").get_node("Area2D").get_node("CollisionShape2D").shape.get_rect().position
 
 	var person_size = person.get_node("CollisionShape2D").shape.get_rect().size
 	var x_pos = randf_range(0, shape.x - person_size.x)
@@ -29,4 +27,4 @@ func generate_person():
 
 	person.global_position = Vector2(x_pos, y_pos)
 	
-	call_deferred("add_child", person)
+	add_child(person)

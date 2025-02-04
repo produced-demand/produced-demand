@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcll0qejjkfl4"]
+
+[ext_resource type="Script" path="res://scripts/station.gd" id="1_lynhj"]
+[ext_resource type="Texture2D" uid="uid://b11wko8qeb1hi" path="res://assets/station.png" id="1_ximm3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7upvr"]
+
+[node name="Station" type="Area2D"]
+script = ExtResource("1_lynhj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(5.51312, 5.51312)
+texture = ExtResource("1_ximm3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(5.72, 5.72)
+shape = SubResource("CircleShape2D_7upvr")
