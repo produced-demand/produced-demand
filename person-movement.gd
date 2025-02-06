@@ -25,4 +25,5 @@ func move_to(target, delta):
 	set_global_position(get_global_position() + delta * speed * vel)
 
 func joined_station():
-	get_node("Sprite2D").visible = false
+	queue_free()
+	#get_node("Sprite2D").visible = false

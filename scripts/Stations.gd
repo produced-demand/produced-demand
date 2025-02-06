@@ -1,6 +1,7 @@
 extends Node
 
 
+var max_stations = 10
 @onready var stations = []
 
 # Called when the node enters the scene tree for the first time.
@@ -28,3 +29,9 @@ func find_closest_station(person):
 
 func get_distance(first_position, second_position):
 	return abs(sqrt((second_position.y - first_position.y) * (second_position.y - first_position.y) + (second_position.x - first_position.x) * (second_position.x - first_position.x))) 
+
+func can_add_station():
+	if len(stations) + 1 <= max_stations:
+		return true
+	else:
+		return false

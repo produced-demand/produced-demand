@@ -19,7 +19,7 @@ func _process(_delta: float) -> void:
 func generate_person():
 	var person = person_scene.instantiate()
 
-	var shape = get_tree().get_root().get_node("level").get_node("Area2D").get_node("CollisionShape2D").shape.get_rect().size
+	var shape = get_tree().get_root().get_node("level").get_node("Areas").get_node("Area2D").get_node("CollisionShape2D").shape.get_rect().size
 
 	var person_size = person.get_node("CollisionShape2D").shape.get_rect().size
 	var x_pos = randf_range(0, shape.x - person_size.x)

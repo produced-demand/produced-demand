@@ -1,35 +1,45 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfwyjyjoj3g8t"]
+[gd_scene load_steps=6 format=3 uid="uid://dfwyjyjoj3g8t"]
 
 [ext_resource type="PackedScene" uid="uid://cueyy45tahn3s" path="res://area.tscn" id="1_eo7to"]
+[ext_resource type="Script" path="res://stations-locations.gd" id="2_bpb2d"]
 [ext_resource type="Script" path="res://scripts/camera_movement.gd" id="2_wg34b"]
 [ext_resource type="PackedScene" uid="uid://bcll0qejjkfl4" path="res://station.tscn" id="3_6vms3"]
+[ext_resource type="Script" path="res://scripts/map_nodes.gd" id="3_n4dic"]
 
 [node name="level" type="Node2D"]
 position = Vector2(397, 83)
 
-[node name="Area2D" parent="." instance=ExtResource("1_eo7to")]
+[node name="Areas" type="Node2D" parent="."]
+
+[node name="Area2D" parent="Areas" instance=ExtResource("1_eo7to")]
 position = Vector2(-393, -79)
 
-[node name="Area2D3" parent="." instance=ExtResource("1_eo7to")]
+[node name="Area2D3" parent="Areas" instance=ExtResource("1_eo7to")]
 position = Vector2(121, -79)
 
-[node name="Area2D2" parent="." instance=ExtResource("1_eo7to")]
+[node name="Area2D2" parent="Areas" instance=ExtResource("1_eo7to")]
 position = Vector2(-136, -79)
 
-[node name="Area2D4" parent="." instance=ExtResource("1_eo7to")]
+[node name="Area2D4" parent="Areas" instance=ExtResource("1_eo7to")]
 position = Vector2(-393, 178)
 
-[node name="Area2D5" parent="." instance=ExtResource("1_eo7to")]
+[node name="Area2D5" parent="Areas" instance=ExtResource("1_eo7to")]
 position = Vector2(121, 178)
 
-[node name="Area2D6" parent="." instance=ExtResource("1_eo7to")]
+[node name="Area2D6" parent="Areas" instance=ExtResource("1_eo7to")]
 position = Vector2(-136, 178)
 
-[node name="Station" parent="." instance=ExtResource("3_6vms3")]
+[node name="Stations" type="Node2D" parent="."]
+script = ExtResource("2_bpb2d")
+
+[node name="Station" parent="Stations" instance=ExtResource("3_6vms3")]
 position = Vector2(266, 318)
 
-[node name="Station2" parent="." instance=ExtResource("3_6vms3")]
+[node name="Station2" parent="Stations" instance=ExtResource("3_6vms3")]
 position = Vector2(-283, 323)
+
+[node name="MapNodes" type="Node2D" parent="."]
+script = ExtResource("3_n4dic")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-11, 174)

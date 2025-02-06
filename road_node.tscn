@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8q0q8hjqw16b"]
+
+[ext_resource type="Texture2D" uid="uid://3ctipql3e3fn" path="res://assets/station.svg" id="1_o0xdt"]
+
+[node name="RoadNode" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -2)
+scale = Vector2(0.28, 0.28)
+texture = ExtResource("1_o0xdt")
