@@ -1,7 +1,7 @@
 extends Node
 
 var map_data: Dictionary
-var data_file_path: String = "res://map_data/produceddemand.json"
+var data_file_path: String = "res://map_data/map.json"
 
 func _ready() -> void:
 	print("attempting to load file...")
