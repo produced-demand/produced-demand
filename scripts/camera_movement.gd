@@ -2,7 +2,7 @@ extends Camera2D
 
 @onready var zoom_in_multiplier = 1.05
 @onready var zoom_out_multiplier = 0.95
-@onready var zoom_speed = 10
+@onready var zoom_speed = 15
 @onready var zoom_target : Vector2
 @onready var pan_speed = 350
 
@@ -28,12 +28,12 @@ func scroll_zoom(delta):
 	if Input.is_action_just_pressed("camera_zoom_out"):
 		zoom_target *= zoom_out_multiplier
 
-	if zoom_target.x > 5:
-		zoom_target.x = 5
-		zoom_target.y = 5;
-	if zoom_target.x < .7:
-		zoom_target.x = .7
-		zoom_target.y = .7
+	if zoom_target.x > 6:
+		zoom_target.x = 6
+		zoom_target.y = 6;
+	if zoom_target.x < .5:
+		zoom_target.x = .5
+		zoom_target.y = .5
 	
 	zoom = zoom.lerp(zoom_target, zoom_speed * delta)
 

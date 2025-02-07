@@ -9,7 +9,28 @@
 [node name="level" type="Node2D"]
 position = Vector2(397, 83)
 
+[node name="OSMWays" type="Node2D" parent="."]
+script = ExtResource("4_d34ci")
+
 [node name="Areas" type="Node2D" parent="."]
+
+[node name="Area2D7" parent="Areas" instance=ExtResource("1_eo7to")]
+position = Vector2(-393, 432)
+
+[node name="Area2D8" parent="Areas" instance=ExtResource("1_eo7to")]
+position = Vector2(121, 432)
+
+[node name="Area2D9" parent="Areas" instance=ExtResource("1_eo7to")]
+position = Vector2(-136, 432)
+
+[node name="Area2D10" parent="Areas" instance=ExtResource("1_eo7to")]
+position = Vector2(-393, 689)
+
+[node name="Area2D11" parent="Areas" instance=ExtResource("1_eo7to")]
+position = Vector2(121, 689)
+
+[node name="Area2D12" parent="Areas" instance=ExtResource("1_eo7to")]
+position = Vector2(-136, 689)
 
 [node name="Area2D" parent="Areas" instance=ExtResource("1_eo7to")]
 position = Vector2(-393, -79)
@@ -37,9 +58,6 @@ position = Vector2(266, 318)
 
 [node name="Station2" parent="Stations" instance=ExtResource("3_6vms3")]
 position = Vector2(-283, 323)
-
-[node name="OSMWays" type="Node2D" parent="."]
-script = ExtResource("4_d34ci")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-11, 174)

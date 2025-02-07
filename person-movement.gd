@@ -26,4 +26,3 @@ func move_to(target, delta):
 
 func joined_station():
 	queue_free()
-	#get_node("Sprite2D").visible = false

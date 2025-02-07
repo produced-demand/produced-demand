@@ -4,7 +4,7 @@ var map_data: Dictionary
 var data_file_path: String = "res://map_data/map.json"
 
 func _ready() -> void:
-	print("attempting to load file...")
+	print("loading map data...")
 	map_data = await load_json(data_file_path)
 	get_tree().get_root().get_node("level").get_node("OSMWays").create_map(map_data)
 

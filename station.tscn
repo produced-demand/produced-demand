@@ -6,7 +6,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_7upvr"]
 
 [node name="Station" type="Area2D"]
-position = Vector2(56, 57)
+position = Vector2(4, 4)
+scale = Vector2(0.0723585, 0.0723585)
 script = ExtResource("1_lynhj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
