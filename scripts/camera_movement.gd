@@ -28,9 +28,9 @@ func scroll_zoom(delta):
 	if Input.is_action_just_pressed("camera_zoom_out"):
 		zoom_target *= zoom_out_multiplier
 
-	if zoom_target.x > 6:
-		zoom_target.x = 6
-		zoom_target.y = 6;
+	if zoom_target.x > 10:
+		zoom_target.x = 10
+		zoom_target.y = 10;
 	if zoom_target.x < .5:
 		zoom_target.x = .5
 		zoom_target.y = .5

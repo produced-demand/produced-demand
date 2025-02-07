@@ -8,6 +8,7 @@ func _input(event: InputEvent) -> void:
 		var camera = get_viewport().get_camera_2d()
 		generate_station(camera.get_global_mouse_position())
 
+
 func generate_station(new_position):
 	if not Stations.can_add_station():
 		return

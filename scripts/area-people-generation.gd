@@ -2,7 +2,7 @@ extends Node2D
 
 var person_scene = preload("res://person.tscn")
 
-@export var interval = 2000
+@export var interval = 1000
 var last_ran = Time.get_ticks_msec()
 
 
@@ -13,7 +13,8 @@ func _process(_delta: float) -> void:
 	var now = Time.get_ticks_msec()
 	if now - last_ran > interval:
 		last_ran = now
-		generate_person()
+		if randi_range(1, 2) == 1:
+			generate_person()
 
 
 func generate_person():
