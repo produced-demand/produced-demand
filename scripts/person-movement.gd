@@ -5,7 +5,7 @@ var at_station: bool = false
 var speed
 
 func _ready() -> void:
-	speed = randf_range(50, 60)
+	speed = randf_range(20, 30)
 	target_station = Stations.find_closest_station(self)
 
 func _process(delta: float) -> void:
