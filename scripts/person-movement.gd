@@ -1,12 +1,14 @@
 extends Area2D
 
 var target_station
+var dream_station
 var at_station: bool = false
 var speed
 
 func _ready() -> void:
 	speed = randf_range(20, 30)
 	target_station = Stations.find_closest_station(self)
+	generate_dream_station()
 
 func _process(delta: float) -> void:
 	if target_station and not at_station:
@@ -26,3 +28,9 @@ func move_to(target, delta):
 
 func joined_station():
 	queue_free()
+
+func generate_dream_station():
+	Stations.get_random_station_excluding(target_station)
+
+func get_dream_station():
+	return dream_station

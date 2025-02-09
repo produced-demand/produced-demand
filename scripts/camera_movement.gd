@@ -10,13 +10,9 @@ var drag_start_mouse_position
 var drag_start_camera_position
 var is_dragging : bool = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	zoom_target = zoom
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	scroll_zoom(delta)
 	simple_pan(delta)

@@ -51,17 +51,17 @@ position = Vector2(121, 178)
 [node name="Area2D6" parent="Areas" instance=ExtResource("1_eo7to")]
 position = Vector2(-136, 178)
 
+[node name="Paths" type="Node2D" parent="."]
+script = ExtResource("5_lm6jf")
+
 [node name="Stations" type="Node2D" parent="."]
 script = ExtResource("2_bpb2d")
 
-[node name="Station" parent="Stations" instance=ExtResource("3_6vms3")]
-position = Vector2(266, 318)
-
 [node name="Station2" parent="Stations" instance=ExtResource("3_6vms3")]
-position = Vector2(-283, 323)
+position = Vector2(-268, 303)
 
-[node name="Paths" type="Node2D" parent="."]
-script = ExtResource("5_lm6jf")
+[node name="Station" parent="Stations" instance=ExtResource("3_6vms3")]
+position = Vector2(246, 307)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-11, 174)

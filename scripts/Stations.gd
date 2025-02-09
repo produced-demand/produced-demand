@@ -35,3 +35,26 @@ func can_add_station():
 		return true
 	else:
 		return false
+
+func get_index_of_station_at_position(given_position):
+	for station_index in range(0, len(stations)):
+		var diff_x = abs(stations[station_index].global_position.x - given_position.x)
+		var diff_y = abs(stations[station_index].global_position.y - given_position.y)
+		if diff_x < 15 and diff_y < 15:
+			return station_index
+	return -1
+
+func get_station_at_position(given_position):
+	for station in stations:
+		var diff_x = abs(station.global_position.x - given_position.x)
+		var diff_y = abs(station.global_position.y - given_position.y)
+		if diff_x < 15 and diff_y < 15:
+			return station
+	return null
+
+func get_random_station_excluding(excluded_station):
+	var random_index = randi_range(0, len(stations) - 1)
+	if stations[random_index] == excluded_station:
+		return get_random_station_excluding(excluded_station)
+	else:
+		return stations[random_index]
