@@ -12,6 +12,7 @@ func add_person(person):
 		print("max people reached! game over!")
 		get_tree().paused = true
 	dream_stations.append(person.get_dream_station())
+	print("dream just extracted: " + str(person.get_dream_station()))
 	person.joined_station() # removes person
 	update_occupants_label()
 	

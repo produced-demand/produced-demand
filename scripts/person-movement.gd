@@ -30,7 +30,7 @@ func joined_station():
 	queue_free()
 
 func generate_dream_station():
-	Stations.get_random_station_excluding(target_station)
+	dream_station = Stations.get_random_station_excluding(target_station)
 
 func get_dream_station():
 	return dream_station

@@ -35,7 +35,6 @@ func _process(delta: float) -> void:
 		for station in route.stations:
 			if global_position.distance_to(station.global_position) < 80:
 				current_station = station
-				visited = false
 				acceleration = (0 - speed ^ 2) / (2 * global_position.distance_to(station.global_position))
 				
 				if station != current_station:
@@ -45,7 +44,7 @@ func _process(delta: float) -> void:
 		speed += acceleration * delta * 100
 
 		if not visited:
-			if global_position.distance_to(current_station.global_position) <= 8:
+			if global_position.distance_to(current_station.global_position) <= 7:
 				speed = 0
 				# after has waited for all passengers to board
 				acceleration = ((speed ^ 2 - 0) / (2 * global_position.distance_to(current_station.global_position)))
@@ -58,6 +57,7 @@ func _process(delta: float) -> void:
 			
 			if global_position.distance_to(current_station.global_position) > 80:
 				current_station = null
+				visited = false
 				speed = top_speed
 				acceleration = 0
 				

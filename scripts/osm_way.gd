@@ -8,7 +8,6 @@ func create_map(map_data):
 	for way in map_data:
 		var data = map_data[way]
 		var line = Line2D.new()
-		#line.script = load(line_script)
 		line.width = 2
 		line.default_color = Color(0.7, randf_range(0, 1), randf_range(0, 1))
 		for i in range(1, len(data), 2):
