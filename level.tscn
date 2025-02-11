@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scripts/camera_movement.gd" id="2_wg34b"]
 [ext_resource type="PackedScene" uid="uid://bcll0qejjkfl4" path="res://station.tscn" id="3_6vms3"]
 [ext_resource type="Script" path="res://scripts/osm_way.gd" id="4_d34ci"]
-[ext_resource type="Script" path="res://path-manager.gd" id="5_lm6jf"]
+[ext_resource type="Script" path="res://scripts/route_creation.gd" id="5_lm6jf"]
 
 [node name="level" type="Node2D"]
 position = Vector2(397, 83)

@@ -48,6 +48,7 @@ func create_path(start_position):
 	var station_at_position = Stations.get_station_at_position(start_position)
 	start_position = station_at_position.get_global_position()
 	current_path.add_station(station_at_position)
+	station_at_position.add_route(current_path)
 	
 	route.curve = Curve2D.new()
 	route.curve.add_point(start_position)
@@ -72,6 +73,7 @@ func add_point_to_path(point_position, final_point):
 	if station_at_position:
 		point_position = station_at_position.get_global_position()
 		current_path.add_station(station_at_position)
+		station_at_position.add_route(current_path)
 
 	if final_point and abs(last_point.x - point_position.x) <= 25 and abs(last_point.x - point_position.x) <= 25:
 		point_position = last_point

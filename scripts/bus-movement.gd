@@ -44,7 +44,7 @@ func _process(delta: float) -> void:
 		speed += acceleration * delta * 100
 
 		if not visited:
-			if global_position.distance_to(current_station.global_position) <= 7:
+			if global_position.distance_to(current_station.global_position) <= 9:
 				speed = 0
 				# after has waited for all passengers to board
 				acceleration = ((speed ^ 2 - 0) / (2 * global_position.distance_to(current_station.global_position)))
