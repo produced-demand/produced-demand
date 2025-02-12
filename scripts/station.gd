@@ -1,6 +1,6 @@
 extends Area2D
 
-var people: int
+var people: int = 0
 var dream_stations: Array
 
 var routes: Array
@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func add_person(person):
 	people += 1
-	if people > 600:
+	if people > 400:
 		# make wordless game over screen later
 		print("max people reached! game over!")
 		get_tree().paused = true
@@ -28,11 +28,14 @@ func take_people(people_amount, stations):
 	print(people_amount)
 	print(stations)
 
-func get_wait_time(people_available):
-	var potential_passengers = max(people_available, people)
-	if potential_passengers > people_available:
-		potential_passengers = people_available
-	return potential_passengers * 200
+func get_wait_time(spots_available):
+	var potential_passengers
+	if spots_available < people:
+		potential_passengers = spots_available
+	else:
+		potential_passengers = people
+	print(str(spots_available) + " " + str(people) + " " + str(potential_passengers))
+	return 400 + (potential_passengers * 600)
 
 func get_people(amount_of_people: int, route):
 	var people_to_send: Array
