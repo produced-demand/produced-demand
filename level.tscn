@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dfwyjyjoj3g8t"]
 
 [ext_resource type="PackedScene" uid="uid://cueyy45tahn3s" path="res://area.tscn" id="1_eo7to"]
-[ext_resource type="Script" path="res://scripts/stations-locations.gd" id="2_bpb2d"]
+[ext_resource type="Script" path="res://scripts/station_creation.gd" id="2_bpb2d"]
 [ext_resource type="Script" path="res://scripts/camera_movement.gd" id="2_wg34b"]
 [ext_resource type="PackedScene" uid="uid://bcll0qejjkfl4" path="res://station.tscn" id="3_6vms3"]
 [ext_resource type="Script" path="res://scripts/osm_way.gd" id="4_d34ci"]

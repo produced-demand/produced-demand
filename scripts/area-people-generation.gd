@@ -13,7 +13,7 @@ func _process(_delta: float) -> void:
 	var now = Time.get_ticks_msec()
 	if now - last_ran > interval:
 		last_ran = now
-		if randi_range(1, 2) == 1:
+		if randi_range(1, 3) == 1:
 			generate_person()
 
 

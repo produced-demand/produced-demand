@@ -10,10 +10,13 @@ config_version=5
 
 [application]
 
-config/name="train-game"
+config/name="produced-demand"
+config/description="A bus management game"
 run/main_scene="res://level.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://assets/icon.svg"
+boot_splash/image="res://assets/station.png"
+boot_splash/fullsize=false
+config/icon="res://assets/station.png"
 
 [autoload]
 

@@ -1,10 +1,12 @@
 to-do
-- NEXT: buses pick up godots
-- godots can choose trains that will lead to correct station
-- pause bus at stations
-- fix glitching with slide in 
+- feat: godots can choose trains that will lead to correct station
+- feat: drop people at stations
+- fix: pick people up across time while sitting at station
+- fix: bus goes too fast occasionally (you know why)
 
-later
+later (feats)
 - game ends w/ screen when too many people at station
 - start screen w/ controls, explain visually
 - saving (user://)
+- dynamically generate people-making ground
+- better assets?

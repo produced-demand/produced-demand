@@ -27,3 +27,26 @@ func add_route(route):
 func take_people(people_amount, stations):
 	print(people_amount)
 	print(stations)
+
+func get_wait_time(people_available):
+	var potential_passengers = max(people_available, people)
+	if potential_passengers > people_available:
+		potential_passengers = people_available
+	return potential_passengers * 200
+
+func get_people(amount_of_people: int, route):
+	var people_to_send: Array
+	# for now just dump them all
+	# can figure out where/how to/whether they should be dumped later
+	for i in range(0, amount_of_people):
+		if len(dream_stations) == 0:
+			break
+		people_to_send.append(dream_stations.pop_front())
+	people -= len(people_to_send)
+	update_occupants_label()
+	return people_to_send
+		
+	
+func deliver_people(people: Array):
+	# will determine whether this station is their dream, if not add to wait
+	pass
