@@ -7,6 +7,10 @@ var routes: Array
 
 func _ready() -> void:
 	Stations.add_station(self)
+	
+	connect("area_entered", _something_in_station)
+	$Nearby.connect("area_entered", _on_range_entered)
+	$Nearby.connect("area_exited", _on_range_exited)
 
 func add_person(person):
 	people += 1
@@ -34,8 +38,7 @@ func get_wait_time(spots_available):
 		potential_passengers = spots_available
 	else:
 		potential_passengers = people
-	print(str(spots_available) + " " + str(people) + " " + str(potential_passengers))
-	return 400 + (potential_passengers * 600)
+	return 400 + (potential_passengers * 300)
 
 func get_people(amount_of_people: int, route):
 	var people_to_send: Array
@@ -48,8 +51,24 @@ func get_people(amount_of_people: int, route):
 	people -= len(people_to_send)
 	update_occupants_label()
 	return people_to_send
-		
-	
+
 func deliver_people(people: Array):
 	# will determine whether this station is their dream, if not add to wait
 	pass
+
+
+
+func _on_range_entered(area):
+	if area.name == "BusCollider":
+		var bus = area.get_parent()
+		bus.approaching_station(self)
+
+func _on_range_exited(area):
+	if area.name == "BusCollider":
+		var bus = area.get_parent()
+		bus.left_station(self)
+
+func _something_in_station(area):
+	if area.name == "BusCollider":
+		var bus = area.get_parent()
+		bus.at_station(self)

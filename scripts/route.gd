@@ -15,3 +15,6 @@ func add_station(station):
 
 func add_bus(bus):
 	add_child(bus)
+
+func has_station(station):
+	return stations.has(station)
