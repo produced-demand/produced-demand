@@ -3,6 +3,8 @@ to-do
 - feat: drop people at stations
 - fix: pick people up across time while sitting at station
 - fix: bus goes too fast occasionally (you know why)
+- fix: error when first station is the same as last station, and there are only two stations
+- fix: potential error when there are multiple stations on the track within range
 
 later (feats)
 - game ends w/ screen when too many people at station
