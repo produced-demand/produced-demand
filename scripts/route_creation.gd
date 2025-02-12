@@ -55,7 +55,7 @@ func create_path(start_position):
 	
 	var line := Line2D.new()
 	line.default_color = Color(randf(), randf(), randf())
-	line.end_cap_mode = 2
+	line.set_end_cap_mode(2)
 	line.width = 6
 	current_line = line
 	line.add_point(start_position)

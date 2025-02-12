@@ -40,7 +40,7 @@ func get_wait_time(spots_available):
 		potential_passengers = people
 	return 400 + (potential_passengers * 300)
 
-func get_people(amount_of_people: int, route):
+func get_people(amount_of_people: int, _route):
 	var people_to_send: Array
 	# for now just dump them all
 	# can figure out where/how to/whether they should be dumped later
@@ -52,7 +52,7 @@ func get_people(amount_of_people: int, route):
 	update_occupants_label()
 	return people_to_send
 
-func deliver_people(people: Array):
+func deliver_people(_peoples_dreams: Array):
 	# will determine whether this station is their dream, if not add to wait
 	pass
 
