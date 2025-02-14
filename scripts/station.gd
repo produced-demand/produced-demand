@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func add_person(person):
 	people += 1
-	if people > 200:
+	if people > 100:
 		Game.end_game()
 	dream_stations.append(person.get_dream_station())
 	person.joined_station() # removes person
@@ -66,6 +66,7 @@ func deliver_people(peoples_dreams: Array):
 		if (dream == self) or station_leads_to_dream(dream, self, [], []):
 			people_to_deliver.append(dream)
 			happy_people += 1
+			Game.add_people_delivered(1)
 	return people_to_deliver
 
 func station_leads_to_dream(dream, current_station, checked_routes: Array, checked_stations: Array):

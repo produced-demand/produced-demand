@@ -19,3 +19,5 @@ later (feats)
 - saving (user://)
 - dynamically generate people-making ground
 - better assets?
+- add indicator for when route is being created, w/ cancel button
+- correctly implement pausing

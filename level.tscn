@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfwyjyjoj3g8t"]
+[gd_scene load_steps=8 format=3 uid="uid://dfwyjyjoj3g8t"]
 
 [ext_resource type="PackedScene" uid="uid://cueyy45tahn3s" path="res://area.tscn" id="1_eo7to"]
 [ext_resource type="Script" path="res://scripts/station_creation.gd" id="2_bpb2d"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bcll0qejjkfl4" path="res://station.tscn" id="3_6vms3"]
 [ext_resource type="Script" path="res://scripts/osm_way.gd" id="4_d34ci"]
 [ext_resource type="Script" path="res://scripts/route_creation.gd" id="5_lm6jf"]
+[ext_resource type="PackedScene" uid="uid://cgjkgp8m3183p" path="res://HUD.tscn" id="6_01tkc"]
 
 [node name="level" type="Node2D"]
 position = Vector2(397, 83)
@@ -62,6 +63,8 @@ position = Vector2(-268, 303)
 
 [node name="Station" parent="Stations" instance=ExtResource("3_6vms3")]
 position = Vector2(246, 307)
+
+[node name="Hud" parent="." instance=ExtResource("6_01tkc")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-11, 174)

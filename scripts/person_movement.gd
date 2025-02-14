@@ -11,7 +11,7 @@ func _ready() -> void:
 	generate_dream_station()
 
 func _process(delta: float) -> void:
-	if target_station and not at_station:
+	if target_station and not at_station and not Game.paused:
 		move_to(target_station, delta)
 
 func move_to(target, delta):

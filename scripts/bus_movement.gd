@@ -25,6 +25,9 @@ func _ready() -> void:
 	parent.progress_ratio = .5
 
 func _process(delta: float) -> void:
+	if Game.paused:
+		return
+
 	if current_station:
 		if not visited and is_at_station:
 			if Time.get_ticks_msec() - time_arrived_at_station > wait_time:
