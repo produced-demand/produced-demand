@@ -22,7 +22,7 @@ func _ready() -> void:
 	speed = top_speed
 	parent = get_parent()
 	route = parent.get_parent()
-	parent.progress_ratio = randf()
+	parent.progress_ratio = .5
 
 func _process(delta: float) -> void:
 	if current_station:
@@ -63,11 +63,11 @@ func _process(delta: float) -> void:
 func approaching_station(station):
 	if route.has_station(station):
 		current_station = station
-		acceleration = (0 - pow(speed, 2)) / (2 * global_position.distance_to(station.global_position))
+		acceleration = (0 - pow(speed, 2)) / (2 * global_position. distance_to(station.global_position))
 
 # leaving range of station
 func left_station(station):
-	if route.has_station(station):
+	if route.has_station(station) and station == current_station:
 		current_station = null
 		visited = false
 		time_arrived_at_station = -1
@@ -75,12 +75,19 @@ func left_station(station):
 		speed = top_speed
 
 # arriving at station
-func at_station(_station):
-	time_arrived_at_station = Time.get_ticks_msec()
-	wait_time = current_station.get_wait_time(get_open_seats())
-	is_at_station = true
-	acceleration = 0
-	speed = 0
+func at_station(station):
+	if station == current_station:
+		time_arrived_at_station = Time.get_ticks_msec()
+
+		var people_delivered = current_station.deliver_people(occupants)
+		for person in people_delivered:
+			var person_index = occupants.find(person, 0)
+			occupants.remove_at(person_index)
+
+		wait_time = current_station.get_wait_time(get_open_seats())
+		is_at_station = true
+		acceleration = 0
+		speed = 0
 
 
 func update_occupants_label():

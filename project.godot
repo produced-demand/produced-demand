@@ -22,6 +22,7 @@ config/icon="res://assets/station.png"
 
 Stations="*res://scripts/Stations.gd"
 MapData="*res://scripts/MapData.gd"
+Game="*res://scripts/Game.gd"
 
 [input]
 

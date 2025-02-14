@@ -1,18 +1,9 @@
 extends Node
 
-
 var max_stations = 10
-@onready var stations = []
+var stations = []
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
-
+var route_being_created = false
 
 func add_station(station_node):
 	stations.append(station_node)
@@ -31,7 +22,7 @@ func get_distance(first_position, second_position):
 	return abs(sqrt((second_position.y - first_position.y) * (second_position.y - first_position.y) + (second_position.x - first_position.x) * (second_position.x - first_position.x))) 
 
 func can_add_station():
-	if len(stations) + 1 <= max_stations:
+	if len(stations) + 1 <= max_stations and not route_being_created:
 		return true
 	else:
 		return false
@@ -58,3 +49,6 @@ func get_random_station_excluding(excluded_station):
 		return get_random_station_excluding(excluded_station)
 	else:
 		return stations[random_index]
+
+func set_route_being_created(value):
+	route_being_created = value

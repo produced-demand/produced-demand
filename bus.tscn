@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d2tmn01f3sqkg"]
 
-[ext_resource type="Script" path="res://scripts/bus-movement.gd" id="1_3nt0m"]
+[ext_resource type="Script" path="res://scripts/bus_movement.gd" id="1_3nt0m"]
 [ext_resource type="Texture2D" uid="uid://dpeiqjymuc8bk" path="res://assets/bus.svg" id="1_mrygt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pbpoj"]

@@ -1,10 +1,17 @@
 to-do
 - feat: godots can choose trains that will lead to correct station
 - feat: drop people at stations
-- fix: pick people up across time while sitting at station
-- fix: bus goes too fast occasionally (you know why)
+- feat: should not slow/stop at station when full and nobody wants to go there
+- feat: add global score
+
 - fix: error when first station is the same as last station, and there are only two stations
 - fix: potential error when there are multiple stations on the track within range
+- fix: buses changing to different route
+- fix: can add infinite routes
+- fix: bus gets stuck when station is too closed
+- fix: clicking again on last point creates extra bus
+- fix: sometimes route does not finish
+- fix: don't allow stations too near other stations
 
 later (feats)
 - game ends w/ screen when too many people at station

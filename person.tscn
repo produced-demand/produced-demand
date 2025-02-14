@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bisiolm2xfwd4"]
 
 [ext_resource type="Texture2D" uid="uid://b1br208ko0klf" path="res://assets/godot.svg" id="1_3k2g2"]
-[ext_resource type="Script" path="res://scripts/person-movement.gd" id="1_ewpfn"]
+[ext_resource type="Script" path="res://scripts/person_movement.gd" id="1_ewpfn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gjvie"]
 radius = 20.025

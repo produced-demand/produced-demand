@@ -1,6 +1,7 @@
 extends Area2D
 
 var people: int = 0
+var happy_people: int = 0 # this is temporary, until global score is kept
 var dream_stations: Array
 
 var routes: Array
@@ -14,10 +15,8 @@ func _ready() -> void:
 
 func add_person(person):
 	people += 1
-	if people > 400:
-		# make wordless game over screen later
-		print("max people reached! game over!")
-		get_tree().paused = true
+	if people > 200:
+		Game.end_game()
 	dream_stations.append(person.get_dream_station())
 	person.joined_station() # removes person
 	update_occupants_label()
@@ -40,22 +39,55 @@ func get_wait_time(spots_available):
 		potential_passengers = people
 	return 400 + (potential_passengers * 300)
 
-func get_people(amount_of_people: int, _route):
+
+# needed code in these two functions can probably be extracted
+func get_people(amount_of_people: int, route):
 	var people_to_send: Array
-	# for now just dump them all
-	# can figure out where/how to/whether they should be dumped later
-	for i in range(0, amount_of_people):
-		if len(dream_stations) == 0:
+
+	for dream in dream_stations:
+		if amount_of_people == 0:
 			break
-		people_to_send.append(dream_stations.pop_front())
+		if route_leads_to_dream(dream, route):
+			var dream_index = dream_stations.find(dream)
+			people_to_send.append(dream)
+			dream_stations.remove_at(dream_index)
+			amount_of_people -= 1
+
 	people -= len(people_to_send)
 	update_occupants_label()
 	return people_to_send
 
-func deliver_people(_peoples_dreams: Array):
-	# will determine whether this station is their dream, if not add to wait
-	pass
+func deliver_people(peoples_dreams: Array):
+	# this should also deliver people if the station is on the way to their final one!
+	var people_to_deliver: Array
+	for dream in peoples_dreams:
+		#print(dream)
+		#print(self)
+		if (dream == self) or station_leads_to_dream(dream, self, [], []):
+			people_to_deliver.append(dream)
+			happy_people += 1
+	return people_to_deliver
 
+func station_leads_to_dream(dream, current_station, checked_routes: Array, checked_stations: Array):
+	# routes of this station
+	for route in current_station.routes:
+		if not route in checked_routes:
+			checked_routes.append(route)
+			for station in route.stations:
+				if not station in checked_stations:
+					if station == dream:
+						return true
+					else:
+						checked_stations.append(station)
+						var result = station_leads_to_dream(dream, station, checked_routes, checked_stations)
+						if result:
+							return true
+	return false
+
+func route_leads_to_dream(dream, route):
+	var excluded_routes = routes.duplicate()
+	excluded_routes.remove_at(excluded_routes.find(route, 0))
+	return station_leads_to_dream(dream, self, excluded_routes, [])
 
 
 func _on_range_entered(area):

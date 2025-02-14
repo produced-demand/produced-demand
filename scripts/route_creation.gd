@@ -6,6 +6,7 @@ var routes = 0
 var creating_path: bool = false
 var current_path
 var current_line
+var current_route_closed
 
 var bus_scene = preload("res://bus.tscn")
 
@@ -16,18 +17,23 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("start_create_path"):
 		var mouse_position = get_viewport().get_camera_2d().get_global_mouse_position()
 		if Stations.get_index_of_station_at_position(mouse_position) != -1:
-			creating_path = not creating_path
-			if creating_path and routes < max_routes:
+			#creating_path = not creating_path
+			if not creating_path and routes < max_routes:
 				routes += 1
 				create_path(mouse_position)
+				Stations.set_route_being_created(true)
+				creating_path = true
 			else:
-				var route_is_closed = add_point_to_path(mouse_position, true)
-				add_child(current_path)
+				var created_route_successfully = add_point_to_path(mouse_position, true)
+				if created_route_successfully:
+					add_child(current_path)
 
-				# remove after testing is done
-				var bus = create_bus(route_is_closed)
-				current_path.add_bus(bus)
-				current_path.set_is_closed(route_is_closed)
+					# remove after testing is done
+					var bus = create_bus(current_route_closed)
+					current_path.add_bus(bus)
+					current_path.set_is_closed(current_route_closed)
+					Stations.set_route_being_created(false)
+					creating_path = false
 
 	elif Input.is_action_just_pressed("left_click") and creating_path:
 		add_point_to_path(get_viewport().get_camera_2d().get_global_mouse_position(), false)
@@ -68,16 +74,24 @@ func create_path(start_position):
 func add_point_to_path(point_position, final_point):
 	var last_point = current_path.curve.get_baked_points()[0]
 	var same_spot = false
-	
+
+	if abs(last_point.x - point_position.x) <= 25 and abs(last_point.x - point_position.x) <= 25:
+		same_spot = true
+		if final_point:
+			point_position = last_point
+		else:
+			current_route_closed = true
+			return false
+
 	var station_at_position = Stations.get_station_at_position(point_position)
 	if station_at_position:
+		if current_path.has_station(station_at_position):
+			current_route_closed = true
+			print("attepmting to set first to last with no points between")
+			return false
 		point_position = station_at_position.get_global_position()
 		current_path.add_station(station_at_position)
 		station_at_position.add_route(current_path)
-
-	if final_point and abs(last_point.x - point_position.x) <= 25 and abs(last_point.x - point_position.x) <= 25:
-		point_position = last_point
-		same_spot = true
 	
 	current_path.curve.add_point(point_position)
 	
@@ -86,10 +100,12 @@ func add_point_to_path(point_position, final_point):
 	current_line.set_points(points)
 	current_line.add_point(point_position)
 	
+	# should be successful if it reached this point
 	if final_point and same_spot:
-		return true
+		current_route_closed = true
 	else:
-		return false
+		current_route_closed = false
+	return true
 
 func create_bus(route_is_closed):
 	var follow_path = PathFollow2D.new()
