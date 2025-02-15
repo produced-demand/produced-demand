@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bcll0qejjkfl4" path="res://station.tscn" id="3_6vms3"]
 [ext_resource type="Script" path="res://scripts/osm_way.gd" id="4_d34ci"]
 [ext_resource type="Script" path="res://scripts/route_creation.gd" id="5_lm6jf"]
-[ext_resource type="PackedScene" uid="uid://cgjkgp8m3183p" path="res://HUD.tscn" id="6_01tkc"]
+[ext_resource type="PackedScene" uid="uid://cfduee8lnq0v2" path="res://HUD.tscn" id="6_01tkc"]
 
 [node name="level" type="Node2D"]
 position = Vector2(397, 83)

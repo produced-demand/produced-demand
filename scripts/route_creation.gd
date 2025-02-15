@@ -1,12 +1,11 @@
 extends Node2D
 
-@export var max_routes: int = 4
-var routes = 0
+var max_routes: int = 6
+var routes: int = 0
 
-var creating_path: bool = false
-var current_path
+var creating_route: bool = false
+var current_route
 var current_line
-var current_route_closed
 
 var bus_scene = preload("res://bus.tscn")
 
@@ -14,52 +13,53 @@ func _ready() -> void:
 	global_position = Vector2.ZERO
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("start_create_path"):
+	if Input.is_action_just_pressed("start_create_route"):
 		var mouse_position = get_viewport().get_camera_2d().get_global_mouse_position()
-		if Stations.get_index_of_station_at_position(mouse_position) != -1:
-			#creating_path = not creating_path
-			if not creating_path and routes < max_routes:
+		if creating_route:
+			var route_finished: bool = add_point_to_route(mouse_position, true)
+			if route_finished:
 				routes += 1
-				create_path(mouse_position)
+				add_child(current_route)
+
+				# remove when manually adding buses is implemented
+				var bus = create_bus(current_route.get_is_closed())
+				current_route.add_bus(bus)
+
+				# remove route creation stuff
+				creating_route = false
+				current_route = null
+				current_line = null
+		else:
+			var is_station_at_position = Stations.get_index_of_station_at_position(mouse_position) != -1
+			if is_station_at_position and routes < max_routes:
+				creating_route = true
+				create_route(mouse_position)
 				Stations.set_route_being_created(true)
-				creating_path = true
-			else:
-				var created_route_successfully = add_point_to_path(mouse_position, true)
-				if created_route_successfully:
-					add_child(current_path)
-
-					# remove after testing is done
-					var bus = create_bus(current_route_closed)
-					current_path.add_bus(bus)
-					current_path.set_is_closed(current_route_closed)
-					Stations.set_route_being_created(false)
-					creating_path = false
-
-	elif Input.is_action_just_pressed("left_click") and creating_path:
-		add_point_to_path(get_viewport().get_camera_2d().get_global_mouse_position(), false)
-	elif event is InputEventMouseMotion and creating_path:
+				Game.hud.toggle_creating_route_indicator()
+	elif Input.is_action_just_pressed("left_click") and creating_route:
+		add_point_to_route(get_viewport().get_camera_2d().get_global_mouse_position(), false)
+	elif event is InputEventMouseMotion and creating_route:
 		var points = current_line.get_points()
 		points[-1] = get_viewport().get_camera_2d().get_global_mouse_position()
 		current_line.set_points(points)
 
 
-
-func create_path(start_position):
+func create_route(start_position):
 	var route = Path2D.new()
-	current_path = route
-
 	var route_script = load("res://scripts/route.gd")
 	route.script = route_script
-	
+	current_route = route
+
 	var station_at_position = Stations.get_station_at_position(start_position)
 	start_position = station_at_position.get_global_position()
-	current_path.add_station(station_at_position)
-	station_at_position.add_route(current_path)
-	
+	current_route.add_station(station_at_position)
+	station_at_position.add_route(current_route)
+
 	route.curve = Curve2D.new()
 	route.curve.add_point(start_position)
-	
-	var line := Line2D.new()
+
+	# live preview
+	var line = Line2D.new()
 	line.default_color = Color(randf(), randf(), randf())
 	line.set_end_cap_mode(2)
 	line.width = 6
@@ -71,41 +71,41 @@ func create_path(start_position):
 	add_child(line)
 
 
-func add_point_to_path(point_position, final_point):
-	var last_point = current_path.curve.get_baked_points()[0]
-	var same_spot = false
+# returns bool, true if point created
+func add_point_to_route(point_position, is_last_point):
+	var points_on_route = current_route.curve.get_baked_points()
+	var first_point = points_on_route[0]
+	var last_point = points_on_route[-1]
 
+	var closes_loop = false
+
+	# if in the same position as the last point
 	if abs(last_point.x - point_position.x) <= 25 and abs(last_point.x - point_position.x) <= 25:
-		same_spot = true
-		if final_point:
-			point_position = last_point
-		else:
-			current_route_closed = true
-			return false
-
+		return false
+	# if in the same position as the first point and this is the final point
+	if is_last_point and abs(first_point.x - point_position.x) <= 25 and abs(first_point.x - point_position.x) <= 25:
+		closes_loop = true
+	# if the new point is the same as the only other point
+	if len(points_on_route) == 1 and first_point == point_position:
+		return false
+		
 	var station_at_position = Stations.get_station_at_position(point_position)
 	if station_at_position:
-		if current_path.has_station(station_at_position):
-			current_route_closed = true
-			print("attepmting to set first to last with no points between")
-			return false
-		point_position = station_at_position.get_global_position()
-		current_path.add_station(station_at_position)
-		station_at_position.add_route(current_path)
-	
-	current_path.curve.add_point(point_position)
-	
+		point_position = station_at_position.global_position
+	elif is_last_point:
+		return false
+
+	current_route.curve.add_point(point_position)
 	var points = current_line.get_points()
 	points[-1] = point_position
 	current_line.set_points(points)
 	current_line.add_point(point_position)
-	
-	# should be successful if it reached this point
-	if final_point and same_spot:
-		current_route_closed = true
-	else:
-		current_route_closed = false
+
+	if is_last_point:
+		current_route.set_is_closed(closes_loop)
+
 	return true
+
 
 func create_bus(route_is_closed):
 	var follow_path = PathFollow2D.new()
