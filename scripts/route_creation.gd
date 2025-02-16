@@ -24,6 +24,8 @@ func _input(event: InputEvent) -> void:
 				# remove when manually adding buses is implemented
 				var bus = create_bus(current_route.get_is_closed())
 				current_route.add_bus(bus)
+				
+				Game.hud.toggle_creating_route_indicator()
 
 				# remove route creation stuff
 				creating_route = false
@@ -73,6 +75,7 @@ func create_route(start_position):
 
 # returns bool, true if point created
 func add_point_to_route(point_position, is_last_point):
+	print("trying to create point")
 	var points_on_route = current_route.curve.get_baked_points()
 	var first_point = points_on_route[0]
 	var last_point = points_on_route[-1]
@@ -80,19 +83,22 @@ func add_point_to_route(point_position, is_last_point):
 	var closes_loop = false
 
 	# if in the same position as the last point
-	if abs(last_point.x - point_position.x) <= 25 and abs(last_point.x - point_position.x) <= 25:
+	if abs(last_point.x - point_position.x) <= 10 and abs(last_point.x - point_position.x) <= 10:
+		print("failed because too close to last point")
 		return false
 	# if in the same position as the first point and this is the final point
 	if is_last_point and abs(first_point.x - point_position.x) <= 25 and abs(first_point.x - point_position.x) <= 25:
 		closes_loop = true
 	# if the new point is the same as the only other point
 	if len(points_on_route) == 1 and first_point == point_position:
+		print("failed because only two points")
 		return false
 		
 	var station_at_position = Stations.get_station_at_position(point_position)
 	if station_at_position:
 		point_position = station_at_position.global_position
 	elif is_last_point:
+		print("failed because is last point and there is no station")
 		return false
 
 	current_route.curve.add_point(point_position)

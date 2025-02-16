@@ -6,8 +6,9 @@ var hud
 
 var paused = true
 
-func end_game():
+func end_game(people_overrun_by):
 	print("max people reached! game over!")
+	hud.get_node("End").get_node("HowManyOver").text = str(people_overrun_by)
 	hud.show_end()
 	get_tree().paused = true
 

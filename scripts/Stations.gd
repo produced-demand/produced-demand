@@ -2,6 +2,7 @@ extends Node
 
 var max_stations = 10
 var stations = []
+var max_people_at_station = 120
 
 var route_being_created = false
 
@@ -31,7 +32,7 @@ func get_index_of_station_at_position(given_position):
 	for station_index in range(0, len(stations)):
 		var diff_x = abs(stations[station_index].global_position.x - given_position.x)
 		var diff_y = abs(stations[station_index].global_position.y - given_position.y)
-		if diff_x < 15 and diff_y < 15:
+		if diff_x < 17 and diff_y < 17:
 			return station_index
 	return -1
 
@@ -39,7 +40,7 @@ func get_station_at_position(given_position):
 	for station in stations:
 		var diff_x = abs(station.global_position.x - given_position.x)
 		var diff_y = abs(station.global_position.y - given_position.y)
-		if diff_x < 15 and diff_y < 15:
+		if diff_x < 17 and diff_y < 17:
 			return station
 	return null
 
