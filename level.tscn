@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://cfduee8lnq0v2" path="res://HUD.tscn" id="6_01tkc"]
 
 [node name="level" type="Node2D"]
-position = Vector2(397, 83)
 
 [node name="OSMWays" type="Node2D" parent="."]
 script = ExtResource("4_d34ci")
@@ -67,5 +66,4 @@ position = Vector2(246, 307)
 [node name="Hud" parent="." instance=ExtResource("6_01tkc")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-11, 174)
 script = ExtResource("2_wg34b")
