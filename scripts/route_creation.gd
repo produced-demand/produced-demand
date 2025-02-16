@@ -97,6 +97,8 @@ func add_point_to_route(point_position, is_last_point):
 	var station_at_position = Stations.get_station_at_position(point_position)
 	if station_at_position:
 		point_position = station_at_position.global_position
+		current_route.add_station(station_at_position)
+		station_at_position.add_route(current_route)
 	elif is_last_point:
 		print("failed because is last point and there is no station")
 		return false

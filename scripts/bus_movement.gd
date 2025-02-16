@@ -33,7 +33,9 @@ func _process(delta: float) -> void:
 			if Time.get_ticks_msec() - time_arrived_at_station > wait_time:
 				# add new passengers
 				var new_occupants = current_station.get_people(get_open_seats(), route)
+				print("new occupants: ")
 				for occupant in new_occupants:
+					print("- " + str(occupant))
 					occupants.append(occupant)
 				update_occupants_label()
 				# leave

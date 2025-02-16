@@ -14,6 +14,7 @@
 script = ExtResource("4_d34ci")
 
 [node name="Areas" type="Node2D" parent="."]
+position = Vector2(12, -435)
 
 [node name="Area2D7" parent="Areas" instance=ExtResource("1_eo7to")]
 position = Vector2(-393, 432)
@@ -55,6 +56,7 @@ position = Vector2(-136, 178)
 script = ExtResource("5_lm6jf")
 
 [node name="Stations" type="Node2D" parent="."]
+position = Vector2(0, -324)
 script = ExtResource("2_bpb2d")
 
 [node name="Station2" parent="Stations" instance=ExtResource("3_6vms3")]

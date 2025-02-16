@@ -1,23 +1,17 @@
 to-do
-- feat: godots can choose trains that will lead to correct station
-- feat: drop people at stations
 - feat: should not slow/stop at station when full and nobody wants to go there
-- feat: add global score
+- feat: add route limit on stations
+- feat: cancel route creation
 
-- fix: error when first station is the same as last station, and there are only two stations
+- fix: bus gets stuck in station circle if there is a bend within circle because it slows to stop before station
 - fix: potential error when there are multiple stations on the track within range
-- fix: buses changing to different route
-- fix: can add infinite routes
-- fix: bus gets stuck when station is too closed
-- fix: clicking again on last point creates extra bus
-- fix: sometimes route does not finish
-- fix: don't allow stations too near other stations
+- fix: don't allow stations too close to other stations
+- fix: bus stuck in station circle if trying to pass through without going to station and station is also on route
 
 later (feats)
-- game ends w/ screen when too many people at station
-- start screen w/ controls, explain visually
 - saving (user://)
 - dynamically generate people-making ground
-- better assets?
-- add indicator for when route is being created, w/ cancel button
+- cancel route creation button
 - correctly implement pausing
+- visually show max amount of routes and stations
+- add buses to routes after creation
