@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_oxnlw"]
 [ext_resource type="Texture2D" uid="uid://b1br208ko0klf" path="res://assets/godot.svg" id="1_q3ry4"]
 [ext_resource type="Texture2D" uid="uid://b11wko8qeb1hi" path="res://assets/station.png" id="2_q4d68"]
-[ext_resource type="Texture2D" uid="uid://85cojwbi4p01" path="res://assets/no-word-intro.png" id="3_dxhcx"]
+[ext_resource type="Texture2D" uid="uid://sby4pyk41bm0" path="res://assets/info.png" id="4_wrmd3"]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_oxnlw")
@@ -143,18 +143,30 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HowToPlayGraphic" type="Sprite2D" parent="Start"]
-position = Vector2(574, 357)
-scale = Vector2(0.183871, 0.183871)
-texture = ExtResource("3_dxhcx")
+[node name="ColorRect" type="ColorRect" parent="Start"]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 64.0
+offset_right = 171.0
+offset_bottom = 104.0
+scale = Vector2(22.84, 13.76)
+
+[node name="HowToGraphic" type="TextureRect" parent="Start"]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 56.0
+offset_right = 1486.0
+offset_bottom = 812.0
+scale = Vector2(0.64, 0.64)
+texture = ExtResource("4_wrmd3")
 
 [node name="StartButton" type="Button" parent="Start"]
 layout_mode = 0
-offset_left = 530.0
-offset_top = 548.0
-offset_right = 557.0
-offset_bottom = 579.0
+offset_left = 556.0
+offset_top = 520.0
+offset_right = 583.0
+offset_bottom = 551.0
 scale = Vector2(1.77453, 1.77453)
-text = "✅"
+text = "->"
 
 [connection signal="pressed" from="Start/StartButton" to="." method="_on_start_button_pressed"]

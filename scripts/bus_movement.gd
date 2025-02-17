@@ -64,11 +64,13 @@ func _process(delta: float) -> void:
 	var new_progress = parent.get_progress() + change
 	parent.set_progress(new_progress)
 
-# entering rango of station
+# entering range of station
 func approaching_station(station):
+	# should only slow down if it plans on going to the station
 	if route.has_station(station):
 		current_station = station
-		acceleration = (0 - pow(speed, 2)) / (2 * global_position. distance_to(station.global_position))
+		# should use actual path distance instead of assumption of a straight line
+		acceleration = (0 - pow(speed, 2)) / (2 * global_position.distance_to(station.global_position))
 
 # leaving range of station
 func left_station(station):
