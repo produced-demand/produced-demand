@@ -25,6 +25,7 @@ func _input(event: InputEvent) -> void:
 				var bus = create_bus(current_route.get_is_closed())
 				current_route.add_bus(bus)
 				
+				Stations.set_route_being_created(false)
 				Game.hud.toggle_creating_route_indicator()
 
 				# remove route creation stuff
@@ -59,6 +60,7 @@ func create_route(start_position):
 
 	route.curve = Curve2D.new()
 	route.curve.add_point(start_position)
+	route.add_point_at_position(start_position, true)
 
 	# live preview
 	var line = Line2D.new()
@@ -75,7 +77,6 @@ func create_route(start_position):
 
 # returns bool, true if point created
 func add_point_to_route(point_position, is_last_point):
-	print("trying to create point")
 	var points_on_route = current_route.curve.get_baked_points()
 	var first_point = points_on_route[0]
 	var last_point = points_on_route[-1]
@@ -83,15 +84,15 @@ func add_point_to_route(point_position, is_last_point):
 	var closes_loop = false
 
 	# if in the same position as the last point
-	if abs(last_point.x - point_position.x) <= 10 and abs(last_point.x - point_position.x) <= 10:
-		print("failed because too close to last point")
+	if abs(last_point.x - point_position.x) <= 5 and abs(last_point.x - point_position.x) <= 5:
+		print("too close to last")
 		return false
 	# if in the same position as the first point and this is the final point
 	if is_last_point and abs(first_point.x - point_position.x) <= 25 and abs(first_point.x - point_position.x) <= 25:
 		closes_loop = true
 	# if the new point is the same as the only other point
 	if len(points_on_route) == 1 and first_point == point_position:
-		print("failed because only two points")
+		print("Same point as first and only")
 		return false
 		
 	var station_at_position = Stations.get_station_at_position(point_position)
@@ -100,10 +101,11 @@ func add_point_to_route(point_position, is_last_point):
 		current_route.add_station(station_at_position)
 		station_at_position.add_route(current_route)
 	elif is_last_point:
-		print("failed because is last point and there is no station")
+		print("trying to set last point onto non-station")
 		return false
 
 	current_route.curve.add_point(point_position)
+	current_route.add_point_at_position(point_position, false if station_at_position == null else true)
 	var points = current_line.get_points()
 	points[-1] = point_position
 	current_line.set_points(points)

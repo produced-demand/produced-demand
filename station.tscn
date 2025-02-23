@@ -33,5 +33,5 @@ horizontal_alignment = 1
 
 [node name="Nearby" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Nearby"]
+[node name="Collider" type="CollisionShape2D" parent="Nearby"]
 shape = SubResource("CircleShape2D_uao8i")

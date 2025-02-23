@@ -25,11 +25,8 @@ func update_occupants_label():
 	get_node("Label").text = str(people)
 
 func add_route(route):
+	#if not route in routes:
 	routes.append(route)
-	
-func take_people(people_amount, stations):
-	print(people_amount)
-	print(stations)
 
 func get_wait_time(spots_available):
 	var potential_passengers
@@ -52,6 +49,10 @@ func get_people(amount_of_people: int, route):
 			people_to_send.append(dream)
 			dream_stations.remove_at(dream_index)
 			amount_of_people -= 1
+		#else:
+			#print("dream: " + str(dream) + " - " + str(route.stations))
+			#print(dream in route.stations)
+			#print("person rejected unfairly")
 
 	people -= len(people_to_send)
 	update_occupants_label()
@@ -61,8 +62,6 @@ func deliver_people(peoples_dreams: Array):
 	# this should also deliver people if the station is on the way to their final one!
 	var people_to_deliver: Array
 	for dream in peoples_dreams:
-		#print(dream)
-		#print(self)
 		if (dream == self) or station_leads_to_dream(dream, self, [], []):
 			people_to_deliver.append(dream)
 			happy_people += 1
@@ -88,7 +87,7 @@ func station_leads_to_dream(dream, current_station, checked_routes: Array, check
 func route_leads_to_dream(dream, route):
 	var excluded_routes = routes.duplicate()
 	excluded_routes.remove_at(excluded_routes.find(route, 0))
-	return station_leads_to_dream(dream, self, excluded_routes, [])
+	return (dream in route.stations) or station_leads_to_dream(dream, self, excluded_routes, [])
 
 
 func _on_range_entered(area):

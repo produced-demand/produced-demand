@@ -2,7 +2,7 @@ extends Node
 
 var max_stations = 10
 var stations = []
-var max_people_at_station = 1
+var max_people_at_station = 120
 
 var route_being_created = false
 
