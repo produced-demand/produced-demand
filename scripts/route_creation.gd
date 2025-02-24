@@ -46,6 +46,16 @@ func _input(event: InputEvent) -> void:
 		points[-1] = get_viewport().get_camera_2d().get_global_mouse_position()
 		current_line.set_points(points)
 
+func cancel_route_creation():
+	current_route.queue_free()
+	current_line.queue_free()
+	
+	Stations.set_route_being_created(false)
+	Game.hud.toggle_creating_route_indicator()
+
+	creating_route = false
+	current_route = null
+	current_line = null
 
 func create_route(start_position):
 	var route = Path2D.new()

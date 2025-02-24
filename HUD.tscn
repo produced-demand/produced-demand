@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfduee8lnq0v2"]
+[gd_scene load_steps=6 format=3 uid="uid://cfduee8lnq0v2"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_oxnlw"]
 [ext_resource type="Texture2D" uid="uid://b1br208ko0klf" path="res://assets/godot.svg" id="1_q3ry4"]
 [ext_resource type="Texture2D" uid="uid://b11wko8qeb1hi" path="res://assets/station.png" id="2_q4d68"]
+[ext_resource type="Texture2D" uid="uid://mpigxyn284ih" path="res://assets/cancel.svg" id="4_amnxb"]
 [ext_resource type="Texture2D" uid="uid://sby4pyk41bm0" path="res://assets/info.png" id="4_wrmd3"]
 
 [node name="Hud" type="CanvasLayer"]
@@ -18,9 +19,9 @@ grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="End"]
 layout_mode = 0
-offset_top = -1.99999
+offset_top = -0.99999
 offset_right = 40.0
-offset_bottom = 38.0
+offset_bottom = 39.0
 scale = Vector2(28.8, 16.24)
 color = Color(1, 0.172549, 0, 1)
 
@@ -94,17 +95,16 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -160.0
+offset_left = -211.0
 offset_top = -110.0
-offset_right = -120.0
-offset_bottom = -70.0
+offset_right = 211.0
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="CreatingRouteIndicator" type="Control" parent="Indicators"]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 422.0
+offset_bottom = 110.0
 
 [node name="CreatingRouteBackground" type="ColorRect" parent="Indicators/CreatingRouteIndicator"]
 layout_mode = 0
@@ -144,6 +144,27 @@ offset_top = 24.0
 offset_right = 160.0
 offset_bottom = 88.0
 color = Color(0.113725, 0.639216, 1, 1)
+
+[node name="CancelRouteCreation" type="Button" parent="Indicators/CreatingRouteIndicator"]
+layout_mode = 0
+offset_left = 323.0
+offset_top = 16.0
+offset_right = 368.0
+offset_bottom = 54.0
+scale = Vector2(1.88, 2.12)
+theme_override_font_sizes/font_size = 21
+
+[node name="ColorRect" type="ColorRect" parent="Indicators/CreatingRouteIndicator/CancelRouteCreation"]
+layout_mode = 0
+offset_right = 40.5
+offset_bottom = 40.5
+scale = Vector2(1.10638, 0.943394)
+mouse_filter = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Indicators/CreatingRouteIndicator/CancelRouteCreation"]
+position = Vector2(22.3404, 19.8113)
+scale = Vector2(0.148753, 0.125219)
+texture = ExtResource("4_amnxb")
 
 [node name="Start" type="Control" parent="."]
 layout_mode = 3
@@ -185,4 +206,5 @@ offset_bottom = 551.0
 scale = Vector2(1.77453, 1.77453)
 text = "->"
 
+[connection signal="pressed" from="Indicators/CreatingRouteIndicator/CancelRouteCreation" to="." method="_on_cancel_route_button_pressed"]
 [connection signal="pressed" from="Start/StartButton" to="." method="_on_start_button_pressed"]

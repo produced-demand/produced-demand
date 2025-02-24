@@ -8,7 +8,7 @@ func _input(event: InputEvent) -> void:
 		generate_station(camera.get_global_mouse_position())
 
 func generate_station(new_position):
-	if not Stations.can_add_station():
+	if not Stations.can_add_station(new_position):
 		return
 
 	var station = station_scene.instantiate()

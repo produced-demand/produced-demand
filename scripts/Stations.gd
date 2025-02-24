@@ -22,11 +22,22 @@ func find_closest_station(person):
 func get_distance(first_position, second_position):
 	return abs(sqrt((second_position.y - first_position.y) * (second_position.y - first_position.y) + (second_position.x - first_position.x) * (second_position.x - first_position.x))) 
 
-func can_add_station():
+func can_add_station(new_position):
+	if station_at(new_position):
+		print("there is a station nearby, cannot place a new one here")
+		return false
 	if len(stations) + 1 <= max_stations and not route_being_created:
 		return true
 	else:
 		return false
+
+func station_at(given_position):
+	for station in stations:
+		var diff_x = abs(station.global_position.x - given_position.x)
+		var diff_y = abs(station.global_position.y - given_position.y)
+		if diff_x < 35 and diff_y < 35:
+			return true
+	return false
 
 func get_index_of_station_at_position(given_position):
 	for station_index in range(0, len(stations)):

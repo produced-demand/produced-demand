@@ -9,6 +9,7 @@ var current_station
 var visited = false
 var is_at_station = false
 var last_point
+var last_station
 
 @export var top_speed = 200
 var speed
@@ -44,6 +45,10 @@ func _process(delta: float) -> void:
 				visited = true
 				is_at_station = false
 				last_point = route.get_point_at_position(current_station.global_position)
+				last_station = current_station
+				current_station = null
+				time_arrived_at_station = -1
+
 
 	# slow down / speed up
 	speed += acceleration * delta
@@ -69,17 +74,15 @@ func _process(delta: float) -> void:
 # entering range of station
 func approaching_station(station):
 	# should only slow down if it plans on going to the station
-	if route.has_station(station) and is_approaching_station(station):
+	if current_station == null and route.has_station(station) and is_approaching_station(station):
 		current_station = station
 		# should use actual path distance instead of assumption of a straight line
 		acceleration = (0 - pow(speed, 2)) / (2 * global_position.distance_to(station.global_position))
 
 # leaving range of station
 func left_station(station):
-	if route.has_station(station) and station == current_station:
-		current_station = null
+	if route.has_station(station) and last_station == station:
 		visited = false
-		time_arrived_at_station = -1
 		acceleration = 0
 		speed = top_speed
 
@@ -102,12 +105,10 @@ func is_approaching_station(station):
 	var next_point = route.get_next_point(last_point) # depends on which way bus is going!
 	# if next point is station
 	if (next_point.position == station.global_position):
-		print("next point == station " + str(last_point) + " : " + str(station.global_position))
 		return true
 	# if reaches station before leaving area
 	var radius = station.get_node("Nearby").get_node("Collider").shape.radius
-	var station_on_path := false
-	while (not station_on_path and in_given_range(radius, station.global_position, next_point)):
+	while (in_given_range(radius, station.global_position, next_point)):
 		if Stations.get_index_of_station_at_position(next_point.position) != -1:
 			return true
 		next_point = route.get_next_point(next_point)

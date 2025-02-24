@@ -23,3 +23,6 @@ func toggle_creating_route_indicator():
 func _on_start_button_pressed() -> void:
 	get_node("Start").hide()
 	Game.start()
+
+func _on_cancel_route_button_pressed() -> void:
+	get_tree().get_root().get_node("level").get_node("Paths").cancel_route_creation()
