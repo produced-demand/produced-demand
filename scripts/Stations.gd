@@ -35,7 +35,7 @@ func station_at(given_position):
 	for station in stations:
 		var diff_x = abs(station.global_position.x - given_position.x)
 		var diff_y = abs(station.global_position.y - given_position.y)
-		if diff_x < 35 and diff_y < 35:
+		if diff_x < 120 and diff_y < 120:
 			return true
 	return false
 

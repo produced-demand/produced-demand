@@ -52,23 +52,31 @@ func get_closest_point(bus):
 func get_distance(first_position, second_position):
 	return abs(sqrt((second_position.y - first_position.y) * (second_position.y - first_position.y) + (second_position.x - first_position.x) * (second_position.x - first_position.x))) 
 
-func get_next_point(point):
+func get_next_point(point, reverse: bool):
 	var index = points.find(point, 0)
-	var next_index = index + 1
+	var next_index = (index + 1) if not reverse else (index - 1)
 	if next_index >= len(points):
 		next_index = 0
+	if next_index < 0:
+		next_index = len(points) - 1
 	return points[next_index]
 
-func get_next_point_with_station(point):
+func get_next_point_with_station(point, reverse: bool):
 	var index = points.find(point, 0)
-	var next_index = index + 1
-	while not next_index.atStation:
-		next_index += 1
+	var next_index = (index + 1) if not reverse else (index - 1)
+	if next_index >= len(points):
+		next_index = 0
+	if next_index < 0:
+		next_index = len(points) - 1
+	while not points[next_index].atStation:
+		next_index = (next_index + 1) if not reverse else (next_index - 1)
+		
 		if next_index >= len(points):
 			next_index = 0
+		if next_index < 0:
+			next_index = len(points) - 1
 
 	return points[next_index]
-
 
 func get_point_at_position(given_position):
 	for point in points:

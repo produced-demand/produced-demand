@@ -76,8 +76,10 @@ func approaching_station(station):
 	# should only slow down if it plans on going to the station
 	if current_station == null and route.has_station(station) and is_approaching_station(station):
 		current_station = station
+		
+		var distance_to_station = get_distance_to_station(station)
 		# should use actual path distance instead of assumption of a straight line
-		acceleration = (0 - pow(speed, 2)) / (2 * global_position.distance_to(station.global_position))
+		acceleration = (0 - pow(speed, 2)) / (2 * distance_to_station) # global_position.distance_to(station.global_position)
 
 # leaving range of station
 func left_station(station):
@@ -102,7 +104,7 @@ func at_station(station):
 		speed = 0
 
 func is_approaching_station(station):
-	var next_point = route.get_next_point(last_point) # depends on which way bus is going!
+	var next_point = route.get_next_point_with_station(last_point, reverse)
 	# if next point is station
 	if (next_point.position == station.global_position):
 		return true
@@ -111,16 +113,29 @@ func is_approaching_station(station):
 	while (in_given_range(radius, station.global_position, next_point)):
 		if Stations.get_index_of_station_at_position(next_point.position) != -1:
 			return true
-		next_point = route.get_next_point(next_point)
-	
+		next_point = route.get_next_point_with_station(next_point, reverse)
 	return false
+
+func get_distance_to_station(station):
+	var next_point = route.get_next_point(last_point, reverse)
+	var distance = distance(global_position, next_point.position) # global_position.distance_to(next_point.position)
+	var current_point = next_point
+	next_point = route.get_next_point(next_point, reverse)
+	
+	while (not next_point.atStation):
+		distance += distance(current_point.position, next_point.position) # current_point.position.get_distance_to(next_point.position)
+		current_point = next_point
+		next_point = route.get_next_point(next_point, reverse)
+
+	return distance
+
+func distance(pos1, pos2):
+	return sqrt((pos2.x - pos1.x) ** 2 + (pos2.y - pos1.y) ** 2)
 
 func in_given_range(radius, target, point):
 	if point.position.x < target.x + radius and point.position.x > target.x - radius:
 		if point.position.y < target.y + radius and point.position.y > target.y - radius:
-			print("in range")
 			return true
-	print("Not in range")
 	return false
 
 func update_occupants_label():

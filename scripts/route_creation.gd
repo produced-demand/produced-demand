@@ -102,7 +102,6 @@ func add_point_to_route(point_position, is_last_point):
 		closes_loop = true
 	# if the new point is the same as the only other point
 	if len(points_on_route) == 1 and first_point == point_position:
-		print("Same point as first and only")
 		return false
 		
 	var station_at_position = Stations.get_station_at_position(point_position)
@@ -111,7 +110,6 @@ func add_point_to_route(point_position, is_last_point):
 		current_route.add_station(station_at_position)
 		station_at_position.add_route(current_route)
 	elif is_last_point:
-		print("trying to set last point onto non-station")
 		return false
 
 	current_route.curve.add_point(point_position)
