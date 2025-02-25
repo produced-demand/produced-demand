@@ -79,7 +79,7 @@ func approaching_station(station):
 		
 		var distance_to_station = get_distance_to_station(station)
 		# should use actual path distance instead of assumption of a straight line
-		acceleration = (0 - pow(speed, 2)) / (2 * distance_to_station) # global_position.distance_to(station.global_position)
+		acceleration = (0 - pow(speed, 2)) / (2 * distance_to_station)
 
 # leaving range of station
 func left_station(station):
@@ -90,7 +90,8 @@ func left_station(station):
 
 # arriving at station
 func at_station(station):
-	if station == current_station:
+	print(get_distance_to_station_from_nearby(station))
+	if station == current_station: # and route.get_next_point(last_point, reverse).atStations:
 		time_arrived_at_station = Time.get_ticks_msec()
 
 		var people_delivered = current_station.deliver_people(occupants)
@@ -118,14 +119,30 @@ func is_approaching_station(station):
 
 func get_distance_to_station(station):
 	var next_point = route.get_next_point(last_point, reverse)
-	var distance = distance(global_position, next_point.position) # global_position.distance_to(next_point.position)
+	var distance = distance(global_position, next_point.position)
 	var current_point = next_point
 	next_point = route.get_next_point(next_point, reverse)
 	
 	while (not next_point.atStation):
-		distance += distance(current_point.position, next_point.position) # current_point.position.get_distance_to(next_point.position)
+		distance += distance(current_point.position, next_point.position)
 		current_point = next_point
 		next_point = route.get_next_point(next_point, reverse)
+	distance += distance(current_point.position, next_point.position)
+
+	return distance
+
+func get_distance_to_station_from_nearby(station):
+	var next_point = route.get_next_point(last_point, reverse)
+	var current_point = next_point
+	next_point = route.get_next_point(next_point, reverse)
+	var distance = distance(global_position, next_point.position)
+	current_point = next_point
+	
+	while (not next_point.atStation):
+		distance += distance(current_point.position, next_point.position)
+		current_point = next_point
+		next_point = route.get_next_point(next_point, reverse)
+	distance += distance(current_point.position, next_point.position)
 
 	return distance
 

@@ -1,17 +1,27 @@
 to-do
-- feat: should not slow/stop at station when full and nobody wants to go there
-- feat: add route limit on stations
-- feat: cancel route creation
+- bus stops at station if it runs through inner even if there is more left on other side before finishing
 
-- fix: bus gets stuck in station circle if there is a bend within circle because it slows to stop before station
-- fix: potential error when there are multiple stations on the track within range
-- fix: don't allow stations too close to other stations
-- fix: bus stuck in station circle if trying to pass through without going to station and station is also on route
-
-later (feats)
+features
+- should not slow/stop at station when full and nobody wants to go there
 - saving (user://)
 - dynamically generate people-making ground
-- cancel route creation button
-- correctly implement pausing
-- visually show max amount of routes and stations
+- play/pause
+- visually show max amount of routes and stations (w/ toolbox)
 - add buses to routes after creation
+- upgrade station capacity
+- use currency
+- remove buses/stations/routes
+- move routes
+- show option as mac alternitve
+- let user know zoom is an option
+- **play again without reloading
+- high score screen
+- title screen - choose play/tutorial
+- weight point score based on travel distance
+- zoom in/out buttons
+- error screen does not take full size
+
+
+
+# juice message when done
+fixed issue where the bus would stop at the station when passing through the center while remaining in the station's range, then skipping the stop at the correct time, centered game over screen for larger screen sizes
