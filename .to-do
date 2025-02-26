@@ -1,5 +1,7 @@
 to-do
+fixes
 - bus stops at station if it runs through inner even if there is more left on other side before finishing
+- if there are points in a circle of a station on the route, and that station is next, it will slow even when outside the circle until reaching it
 
 features
 - should not slow/stop at station when full and nobody wants to go there
@@ -19,9 +21,5 @@ features
 - title screen - choose play/tutorial
 - weight point score based on travel distance
 - zoom in/out buttons
-- error screen does not take full size
-
-
-
-# juice message when done
-fixed issue where the bus would stop at the station when passing through the center while remaining in the station's range, then skipping the stop at the correct time, centered game over screen for larger screen sizes
+- visual feedback for unable to place stations too close
+- game over screen does not take full size

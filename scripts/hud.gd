@@ -26,3 +26,8 @@ func _on_start_button_pressed() -> void:
 
 func _on_cancel_route_button_pressed() -> void:
 	get_tree().get_root().get_node("level").get_node("Paths").cancel_route_creation()
+
+
+func _on_play_again_pressed() -> void:
+	print("resetting game")
+	get_tree().reload_scene()

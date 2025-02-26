@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfduee8lnq0v2"]
+[gd_scene load_steps=7 format=3 uid="uid://cfduee8lnq0v2"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_oxnlw"]
 [ext_resource type="Texture2D" uid="uid://b1br208ko0klf" path="res://assets/godot.svg" id="1_q3ry4"]
 [ext_resource type="Texture2D" uid="uid://b11wko8qeb1hi" path="res://assets/station.png" id="2_q4d68"]
+[ext_resource type="Texture2D" uid="uid://c0aiihk67lhda" path="res://assets/رسم.svg" id="3_8w138"]
 [ext_resource type="Texture2D" uid="uid://mpigxyn284ih" path="res://assets/cancel.svg" id="4_amnxb"]
 [ext_resource type="Texture2D" uid="uid://sby4pyk41bm0" path="res://assets/info.png" id="4_wrmd3"]
 
@@ -42,30 +43,44 @@ text = "😞"
 
 [node name="TextureRect" type="TextureRect" parent="End"]
 layout_mode = 0
-offset_left = 416.0
-offset_top = 384.0
-offset_right = 456.0
-offset_bottom = 424.0
+offset_left = 433.0
+offset_top = 489.0
+offset_right = 473.0
+offset_bottom = 529.0
 scale = Vector2(3.30178, 3.30178)
 texture = ExtResource("2_q4d68")
 
 [node name="HowManyOver" type="Label" parent="End"]
 layout_mode = 0
-offset_left = 448.0
-offset_top = 464.0
-offset_right = 513.0
-offset_bottom = 517.0
+offset_left = 465.0
+offset_top = 569.0
+offset_right = 530.0
+offset_bottom = 622.0
 theme_override_font_sizes/font_size = 38
 text = "120"
 
 [node name="ComparedToMax" type="Label" parent="End"]
 layout_mode = 0
-offset_left = 566.0
-offset_top = 464.0
-offset_right = 663.0
-offset_bottom = 517.0
+offset_left = 583.0
+offset_top = 569.0
+offset_right = 680.0
+offset_bottom = 622.0
 theme_override_font_sizes/font_size = 38
 text = "> 120"
+
+[node name="PlayAgainButton" type="Button" parent="End"]
+visible = false
+layout_mode = 0
+offset_left = 530.0
+offset_top = 390.0
+offset_right = 610.0
+offset_bottom = 470.0
+
+[node name="Sprite2D" type="Sprite2D" parent="End/PlayAgainButton"]
+visible = false
+position = Vector2(39, 40)
+scale = Vector2(0.173151, 0.173151)
+texture = ExtResource("3_8w138")
 
 [node name="Score" type="Control" parent="."]
 layout_mode = 3
@@ -118,6 +133,7 @@ offset_left = 8.0
 offset_top = 16.0
 offset_right = 312.0
 offset_bottom = 96.0
+mouse_filter = 2
 
 [node name="ColorRect4" type="ColorRect" parent="Indicators/CreatingRouteIndicator"]
 layout_mode = 0
@@ -125,6 +141,7 @@ offset_left = 264.0
 offset_top = 24.0
 offset_right = 304.0
 offset_bottom = 88.0
+mouse_filter = 2
 color = Color(0.113725, 0.639216, 1, 1)
 
 [node name="ColorRect3" type="ColorRect" parent="Indicators/CreatingRouteIndicator"]
@@ -133,6 +150,7 @@ offset_left = 216.0
 offset_top = 24.0
 offset_right = 256.0
 offset_bottom = 88.0
+mouse_filter = 2
 color = Color(0.113725, 0.639216, 1, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="Indicators/CreatingRouteIndicator"]
@@ -141,6 +159,7 @@ offset_left = 168.0
 offset_top = 24.0
 offset_right = 208.0
 offset_bottom = 88.0
+mouse_filter = 2
 color = Color(0.113725, 0.639216, 1, 1)
 
 [node name="ColorRect" type="ColorRect" parent="Indicators/CreatingRouteIndicator"]
@@ -149,6 +168,7 @@ offset_left = 16.0
 offset_top = 24.0
 offset_right = 160.0
 offset_bottom = 88.0
+mouse_filter = 2
 color = Color(0.113725, 0.639216, 1, 1)
 
 [node name="CancelRouteCreation" type="Button" parent="Indicators/CreatingRouteIndicator"]
@@ -212,5 +232,6 @@ offset_bottom = 551.0
 scale = Vector2(1.77453, 1.77453)
 text = "->"
 
+[connection signal="pressed" from="End/PlayAgainButton" to="." method="_on_play_again_pressed"]
 [connection signal="pressed" from="Indicators/CreatingRouteIndicator/CancelRouteCreation" to="." method="_on_cancel_route_button_pressed"]
 [connection signal="pressed" from="Start/StartButton" to="." method="_on_start_button_pressed"]
