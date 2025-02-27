@@ -1,6 +1,5 @@
 to-do
 fixes
-- bus stops at station if it runs through inner even if there is more left on other side before finishing
 - if there are points in a circle of a station on the route, and that station is next, it will slow even when outside the circle until reaching it
 
 features

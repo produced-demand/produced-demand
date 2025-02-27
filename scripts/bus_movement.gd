@@ -75,6 +75,7 @@ func _process(delta: float) -> void:
 func approaching_station(station):
 	# should only slow down if it plans on going to the station
 	if current_station == null and route.has_station(station) and is_approaching_station(station):
+		print("set current station")
 		current_station = station
 
 		var distance_to_station = get_distance_to_station(station)
@@ -117,24 +118,24 @@ func is_approaching_station(station):
 	while not in_given_range(radius, station.global_position, next_point):
 		next_point = route.get_next_point(next_point, reverse)
 	first_point_in_range = next_point
-	if first_point_in_range == next_point_with_station:
+	last_point = route.get_next_point(next_point, reverse)
+	#if first_point_in_range == next_point_with_station:
+		#return true
+	#else: # multiple points in station
+	if all_between_points_in_range(first_point_in_range, next_point_with_station, radius):
+		print("all points in range")
 		return true
-	else: # multiple points in station
-		if all_between_points_in_range(first_point_in_range, next_point_with_station, radius, station.global_position):
-			print("all points in range")
-			return true
-		else:
-			print("not all points in range")
-			return false # causing errors now because of outlier in in_Range
+	else:
+		print("not all points in range")
+		return false
 
-func all_between_points_in_range(first_point, last_point, radius, station_position):
+func all_between_points_in_range(first_point, last_point, radius):
 	var current_point = first_point
 	while current_point != last_point:
-		if not in_given_range(radius, station_position, current_point):
+		if not in_given_range(radius, last_point.position, current_point):
 			return false
 		current_point = route.get_next_point(current_point, reverse)
 	return true
-
 
 func get_distance_to_station(station):
 	var next_point = route.get_next_point(last_point, reverse)
@@ -150,27 +151,11 @@ func get_distance_to_station(station):
 
 	return distance_to
 
-#func get_distance_to_station_from_nearby(station):
-	#var next_point = route.get_next_point(last_point, reverse)
-	#var current_point = next_point
-	#next_point = route.get_next_point(next_point, reverse)
-	#var distance_to = distance(global_position, next_point.position)
-	#current_point = next_point
-#
-	#while (not next_point.atStation and next_point.position == station.global_position):
-		#distance_to += distance(current_point.position, next_point.position)
-		#current_point = next_point
-		#next_point = route.get_next_point(next_point, reverse)
-	#distance_to += distance(current_point.position, next_point.position)
-#
-	#return distance_to
-
 func distance(pos1, pos2):
 	return sqrt((pos2.x - pos1.x) ** 2 + (pos2.y - pos1.y) ** 2)
 
 func in_given_range(radius, target, point):
 	var origin_to_point_distance = distance(target, point.position)
-	print(origin_to_point_distance)
 	if origin_to_point_distance <= radius:
 		return true
 	return false
