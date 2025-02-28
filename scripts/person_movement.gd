@@ -3,11 +3,13 @@ extends Area2D
 var target_station
 var dream_station
 var at_station: bool = false
+var distance_walked
 var speed
 
 func _ready() -> void:
 	speed = randf_range(20, 30)
 	target_station = Stations.find_closest_station(self)
+	distance_walked = Stations.get_distance(get_global_position(), target_station.get_global_position())
 	generate_dream_station()
 
 func _process(delta: float) -> void:

@@ -7,7 +7,6 @@ var route_closed: bool
 
 var current_station
 var visited = false
-var is_at_station = false
 var last_point
 var last_station
 
@@ -19,6 +18,9 @@ var occupants: Array
 
 var time_arrived_at_station = -1
 var wait_time
+
+func is_at_station():
+	return time_arrived_at_station != -1
 
 func _ready() -> void:
 	speed = top_speed
@@ -32,7 +34,7 @@ func _process(delta: float) -> void:
 		return
 
 	if current_station:
-		if not visited and is_at_station:
+		if not visited and is_at_station():
 			# add new passengers
 			var new_occupants = current_station.get_people(get_open_seats(), route)
 			for occupant in new_occupants:
@@ -43,7 +45,6 @@ func _process(delta: float) -> void:
 				# leave
 				acceleration = ((pow(top_speed, 2)) / (2 * 80))
 				visited = true
-				is_at_station = false
 				last_point = route.get_point_at_position(current_station.global_position)
 				last_station = current_station
 				current_station = null
@@ -91,7 +92,6 @@ func left_station(station):
 
 # arriving at station
 func at_station(station):
-	# ISSUE HERE - IT MAY STOP BEFORE TIME like when going through the center
 	if station == current_station: # and route.get_next_point(last_point, reverse).atStations:
 		time_arrived_at_station = Time.get_ticks_msec()
 
@@ -101,7 +101,6 @@ func at_station(station):
 			occupants.remove_at(person_index)
 
 		wait_time = current_station.get_wait_time(get_open_seats())
-		is_at_station = true
 		acceleration = 0
 		speed = 0
 
@@ -119,15 +118,7 @@ func is_approaching_station(station):
 		next_point = route.get_next_point(next_point, reverse)
 	first_point_in_range = next_point
 	last_point = route.get_next_point(next_point, reverse)
-	#if first_point_in_range == next_point_with_station:
-		#return true
-	#else: # multiple points in station
-	if all_between_points_in_range(first_point_in_range, next_point_with_station, radius):
-		print("all points in range")
-		return true
-	else:
-		print("not all points in range")
-		return false
+	return all_between_points_in_range(first_point_in_range, next_point_with_station, radius)
 
 func all_between_points_in_range(first_point, last_point, radius):
 	var current_point = first_point
@@ -159,6 +150,8 @@ func in_given_range(radius, target, point):
 	if origin_to_point_distance <= radius:
 		return true
 	return false
+
+
 
 func update_occupants_label():
 	$Label.text = str(len(occupants))
