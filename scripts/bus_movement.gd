@@ -5,10 +5,13 @@ var parent
 var reverse: bool = false
 var route_closed: bool
 
-var current_station
-var visited = false
 var last_point
 var last_station
+
+var current_station
+
+var time_arrived_at_station = -1
+var wait_time
 
 @export var top_speed = 200
 var speed
@@ -16,8 +19,6 @@ var acceleration = 0
 var max_occupancy = 8
 var occupants: Array
 
-var time_arrived_at_station = -1
-var wait_time
 
 func is_at_station():
 	return time_arrived_at_station != -1
@@ -33,66 +34,40 @@ func _process(delta: float) -> void:
 	if Game.paused:
 		return
 
-	if current_station:
-		if not visited and is_at_station():
-			# add new passengers
-			var new_occupants = current_station.get_people(get_open_seats(), route)
-			for occupant in new_occupants:
-				occupants.append(occupant)
-			update_occupants_label()
+	if is_at_station():
+		collect_people()
+		if Time.get_ticks_msec() - time_arrived_at_station > wait_time:
+			exit_station()
 
-			if Time.get_ticks_msec() - time_arrived_at_station > wait_time:
-				# leave
-				acceleration = ((pow(top_speed, 2)) / (2 * 80))
-				visited = true
-				last_point = route.get_point_at_position(current_station.global_position)
-				last_station = current_station
-				current_station = null
-				time_arrived_at_station = -1
-
-
-	# slow down / speed up
-	speed += acceleration * delta
-	# the reason this will happen when leaving stations is because there is extra time
-	# where the bus is accelerated when it goes behind the station
-	if speed > top_speed:
-		acceleration = 0
-		speed = top_speed
-
+	var speed = update_bus_speed(delta)
 	var change = speed * delta
+	update_bus_position(change)
 
-	if not route_closed:
-		if parent.get_progress_ratio() >= .98:
-			reverse = true
-		elif parent.get_progress_ratio() <= .02:
-			reverse = false
-		if reverse:
-			change *= -1
 
-	var new_progress = parent.get_progress() + change
-	parent.set_progress(new_progress)
-
-# entering range of station
-func approaching_station(station):
-	# should only slow down if it plans on going to the station
+func entered_station_range(station):
+	print("hai: " + str(is_approaching_station(station)))
+	return
 	if current_station == null and route.has_station(station) and is_approaching_station(station):
 		print("set current station")
+		print(station)
 		current_station = station
 
-		var distance_to_station = get_distance_to_station(station)
-		# should use actual path distance instead of assumption of a straight line
+		var distance_to_station = get_distance_to_station(station) # value may currently be off
 		acceleration = (0 - pow(speed, 2)) / (2 * distance_to_station)
 
 # leaving range of station
-func left_station(station):
-	if route.has_station(station) and last_station == station:
-		visited = false
+func exited_station_range(station):
+	return
+	if route.has_station(station): # and last_station == station:
 		acceleration = 0
 		speed = top_speed
 
 # arriving at station
-func at_station(station):
-	if station == current_station: # and route.get_next_point(last_point, reverse).atStations:
+func entered_station(station):
+	return
+	print("now at station")
+	print(current_station)
+	if station == current_station: #cd  and route.get_next_point(last_point, reverse).atStations:
 		time_arrived_at_station = Time.get_ticks_msec()
 
 		var people_delivered = current_station.deliver_people(occupants)
@@ -104,6 +79,16 @@ func at_station(station):
 		acceleration = 0
 		speed = 0
 
+func exit_station():
+	return
+	# leave
+	acceleration = ((pow(top_speed, 2)) / (2 * 80))
+	last_point = route.get_point_at_position(current_station.global_position)
+	last_station = current_station
+	current_station = null
+	time_arrived_at_station = -1
+
+
 
 func is_approaching_station(station):
 	# checking that next station 
@@ -114,18 +99,28 @@ func is_approaching_station(station):
 	var first_point_in_range
 	var next_point = last_point
 	var radius = station.get_node("Nearby").get_node("Collider").shape.radius
+	print("--")
 	while not in_given_range(radius, station.global_position, next_point):
 		next_point = route.get_next_point(next_point, reverse)
+		print(next_point)
 	first_point_in_range = next_point
-	last_point = route.get_next_point(next_point, reverse)
-	return all_between_points_in_range(first_point_in_range, next_point_with_station, radius)
+	last_point = first_point_in_range
+	print("---")
+	var none_outside_range = all_between_points_in_range(first_point_in_range, next_point_with_station, radius)
+	print("howdy " + str(none_outside_range))
+	return none_outside_range
 
 func all_between_points_in_range(first_point, last_point, radius):
 	var current_point = first_point
+	#print(str(current_point) + " ; " + str(last_point))
+	
+	print("haaiii")
 	while current_point != last_point:
 		if not in_given_range(radius, last_point.position, current_point):
+			print("badddddddddddddddddddddddddd")
 			return false
 		current_point = route.get_next_point(current_point, reverse)
+	print("they the saaaame")
 	return true
 
 func get_distance_to_station(station):
@@ -152,6 +147,30 @@ func in_given_range(radius, target, point):
 	return false
 
 
+func update_bus_speed(delta):
+	speed += acceleration * delta
+	if speed > top_speed:
+		acceleration = 0
+		speed = top_speed
+	return speed
+
+func update_bus_position(change):
+	if not route_closed:
+		if parent.get_progress_ratio() >= .98:
+			reverse = true
+		elif parent.get_progress_ratio() <= .02:
+			reverse = false
+		if reverse:
+			change *= -1
+
+	var new_progress = parent.get_progress() + change
+	parent.set_progress(new_progress)
+
+func collect_people():
+	var new_occupants = current_station.get_people(get_open_seats(), route)
+	for occupant in new_occupants:
+		occupants.append(occupant)
+	update_occupants_label()
 
 func update_occupants_label():
 	$Label.text = str(len(occupants))
@@ -161,3 +180,10 @@ func set_route_closed(value: bool):
 
 func get_open_seats():
 	return max_occupancy - len(occupants)
+
+func on_route(given_route):
+	return given_route == route
+
+func set_last_point(point):
+	print("last-point" + str(point))
+	last_point = point

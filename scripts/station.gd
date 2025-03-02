@@ -93,14 +93,14 @@ func route_leads_to_dream(dream, route):
 func _on_range_entered(area):
 	if area.name == "BusCollider":
 		var bus = area.get_parent()
-		bus.approaching_station(self)
+		bus.entered_station_range(self)
 
 func _on_range_exited(area):
 	if area.name == "BusCollider":
 		var bus = area.get_parent()
-		bus.left_station(self)
+		bus.exited_station_range(self)
 
 func _something_in_station(area):
 	if area.name == "BusCollider":
 		var bus = area.get_parent()
-		bus.at_station(self)
+		bus.entered_station(self)

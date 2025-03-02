@@ -33,11 +33,31 @@ func add_point_at_position(point, atStation):
 		"atStation": atStation
 	})
 
-	var marker = Sprite2D.new()
-	marker.texture = load("res://assets/icon.svg")
-	marker.global_position = point
-	add_child(marker)
-	marker.scale = Vector2(.25, .25)
+	#var marker = Sprite2D.new()
+	#marker.texture = load("res://assets/icon.svg")
+	#marker.global_position = point
+	#add_child(marker)
+	#marker.scale = Vector2(.25, .25)
+	#
+	# add collider
+	var circle_shape = CircleShape2D.new()
+	circle_shape.radius = 20
+
+	var area = Area2D.new()
+	add_child(area)
+
+	var area_collision_shape = CollisionShape2D.new()
+	area_collision_shape.shape = circle_shape
+	area.global_position = point
+	area.add_child(area_collision_shape)
+	
+	#area.connect("area_entered", _on_bus_entered.bind(len(points) - 1))
+
+func _on_bus_entered(area, point_index):
+	if area.name == "BusCollider":
+		var bus = area.get_parent()
+		if bus.on_route(self):
+			bus.set_last_point(points[point_index])
 
 func get_closest_point(bus):
 	var closest = points[0]
