@@ -13,7 +13,7 @@ var current_station
 var time_arrived_at_station = -1
 var wait_time
 
-@export var top_speed = 200
+@export var top_speed = 100 # 200
 var speed
 var acceleration = 0
 var max_occupancy = 8
@@ -43,31 +43,26 @@ func _process(delta: float) -> void:
 	var change = speed * delta
 	update_bus_position(change)
 
+# ======================================================
 
 func entered_station_range(station):
-	print("hai: " + str(is_approaching_station(station)))
-	return
-	if current_station == null and route.has_station(station) and is_approaching_station(station):
-		print("set current station")
-		print(station)
-		current_station = station
+	if current_station == null:
+		if route.has_station(station):
+			if is_approaching_station(station):
+				print("entered range of station: " + str(station))
+				current_station = station
+				var distance_to_station = get_distance_to_station(station) # value may currently be off
+				acceleration = (0 - pow(speed, 2)) / (2 * distance_to_station)
 
-		var distance_to_station = get_distance_to_station(station) # value may currently be off
-		acceleration = (0 - pow(speed, 2)) / (2 * distance_to_station)
-
-# leaving range of station
 func exited_station_range(station):
 	return
 	if route.has_station(station): # and last_station == station:
 		acceleration = 0
 		speed = top_speed
 
-# arriving at station
 func entered_station(station):
-	return
-	print("now at station")
-	print(current_station)
-	if station == current_station: #cd  and route.get_next_point(last_point, reverse).atStations:
+	print("arrived at station: " + str(station))
+	if station == current_station:
 		time_arrived_at_station = Time.get_ticks_msec()
 
 		var people_delivered = current_station.deliver_people(occupants)
@@ -80,47 +75,47 @@ func entered_station(station):
 		speed = 0
 
 func exit_station():
-	return
-	# leave
 	acceleration = ((pow(top_speed, 2)) / (2 * 80))
 	last_point = route.get_point_at_position(current_station.global_position)
 	last_station = current_station
 	current_station = null
 	time_arrived_at_station = -1
 
-
+# ======================================================
 
 func is_approaching_station(station):
-	# checking that next station 
+	# checking that next station
 	var next_point_with_station = route.get_next_point_with_station(last_point, reverse)
 	if not Stations.stations[Stations.get_index_of_station_at_position(next_point_with_station.position)] == station:
 		return false
-		
+
 	var first_point_in_range
 	var next_point = last_point
 	var radius = station.get_node("Nearby").get_node("Collider").shape.radius
-	print("--")
+
 	while not in_given_range(radius, station.global_position, next_point):
 		next_point = route.get_next_point(next_point, reverse)
-		print(next_point)
+
 	first_point_in_range = next_point
-	last_point = first_point_in_range
-	print("---")
+	print("first point in range? " + str(in_given_range(radius, station.global_position, next_point)))
+
+	var marker = Sprite2D.new()
+	marker.texture = load("res://assets/icon.svg")
+	marker.global_position = first_point_in_range.position
+	route.add_child(marker)
+	marker.scale = Vector2(.25, .25)
+
 	var none_outside_range = all_between_points_in_range(first_point_in_range, next_point_with_station, radius)
-	print("howdy " + str(none_outside_range))
+	print("all ponits in range: " + str(none_outside_range))
 	return none_outside_range
 
 func all_between_points_in_range(first_point, last_point, radius):
 	var current_point = first_point
-	#print(str(current_point) + " ; " + str(last_point))
-	
-	print("haaiii")
+
 	while current_point != last_point:
 		if not in_given_range(radius, last_point.position, current_point):
-			print("badddddddddddddddddddddddddd")
 			return false
 		current_point = route.get_next_point(current_point, reverse)
-	print("they the saaaame")
 	return true
 
 func get_distance_to_station(station):
@@ -142,6 +137,7 @@ func distance(pos1, pos2):
 
 func in_given_range(radius, target, point):
 	var origin_to_point_distance = distance(target, point.position)
+
 	if origin_to_point_distance <= radius:
 		return true
 	return false
@@ -185,5 +181,4 @@ func on_route(given_route):
 	return given_route == route
 
 func set_last_point(point):
-	print("last-point" + str(point))
 	last_point = point

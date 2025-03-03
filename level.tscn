@@ -23,7 +23,7 @@ position = Vector2(-393, 432)
 position = Vector2(121, 432)
 
 [node name="Area2D9" parent="Areas" instance=ExtResource("1_eo7to")]
-position = Vector2(-134, 424)
+position = Vector2(-136, 433)
 
 [node name="Area2D10" parent="Areas" instance=ExtResource("1_eo7to")]
 position = Vector2(-393, 689)

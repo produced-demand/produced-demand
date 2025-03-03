@@ -51,7 +51,7 @@ func add_point_at_position(point, atStation):
 	area.global_position = point
 	area.add_child(area_collision_shape)
 	
-	#area.connect("area_entered", _on_bus_entered.bind(len(points) - 1))
+	area.connect("area_entered", _on_bus_entered.bind(len(points) - 1))
 
 func _on_bus_entered(area, point_index):
 	if area.name == "BusCollider":
