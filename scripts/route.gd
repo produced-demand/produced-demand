@@ -57,7 +57,9 @@ func _on_bus_entered(area, point_index):
 	if area.name == "BusCollider":
 		var bus = area.get_parent()
 		if bus.on_route(self):
-			bus.set_last_point(points[point_index])
+			if self.get_next_point(bus.last_point, bus.reverse) == points[point_index]:
+				bus.set_last_point(points[point_index])
+
 
 func get_closest_point(bus):
 	var closest = points[0]

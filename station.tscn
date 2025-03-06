@@ -35,3 +35,4 @@ horizontal_alignment = 1
 
 [node name="Collider" type="CollisionShape2D" parent="Nearby"]
 shape = SubResource("CircleShape2D_uao8i")
+debug_color = Color(0.706128, 0.483878, 0.186907, 0.42)
