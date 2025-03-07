@@ -130,9 +130,9 @@ func update_bus_speed(delta):
 
 func update_bus_position(change):
 	if not route_closed:
-		if parent.get_progress_ratio() >= .999:
+		if parent.get_progress_ratio() >= .99:
 			reverse = true
-		elif parent.get_progress_ratio() <= .001:
+		elif parent.get_progress_ratio() <= .01:
 			reverse = false
 		if reverse:
 			change *= -1

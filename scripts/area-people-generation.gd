@@ -2,7 +2,6 @@ extends Node2D
 
 var person_scene = preload("res://person.tscn")
 
-@export var interval = 1000
 var last_ran = Time.get_ticks_msec()
 
 
@@ -11,7 +10,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	var now = Time.get_ticks_msec()
-	if now - last_ran > interval and not Game.paused:
+	if now - last_ran > Game.people_creation_speed and not Game.paused:
 		last_ran = now
 		if randi_range(1, 3) == 1:
 			generate_person()

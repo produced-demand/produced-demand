@@ -1,24 +1,28 @@
 to-do
-fixes
-- if there are points in a circle of a station on the route, and that station is next, it will slow even when outside the circle until reaching it
+mechanics
+- **dynamically generate people-making ground
+- **weight point score based on travel distance
+- **play again without reloading
+- make people generating ground spread over time
 
 features
-- should not slow/stop at station when full and nobody wants to go there
 - saving (user://)
-- dynamically generate people-making ground
 - play/pause
-- visually show max amount of routes and stations (w/ toolbox)
 - add buses to routes after creation
 - upgrade station capacity
-- use currency
 - remove buses/stations/routes
 - move routes
-- show option as mac alternitve
-- let user know zoom is an option
-- **play again without reloading
+- should not slow/stop at station when full and nobody wants to go there
+
+ux
 - high score screen
 - title screen - choose play/tutorial
-- weight point score based on travel distance
+- visually show max amount of routes and stations (w/ toolbox)
+
+ui
+- game over screen does not take full size
 - zoom in/out buttons
 - visual feedback for unable to place stations too close
-- game over screen does not take full size
+- show option as mac alternitve
+- let user know zoom is an option
+

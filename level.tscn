@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfwyjyjoj3g8t"]
+[gd_scene load_steps=9 format=3 uid="uid://dfwyjyjoj3g8t"]
 
 [ext_resource type="PackedScene" uid="uid://cueyy45tahn3s" path="res://area.tscn" id="1_eo7to"]
 [ext_resource type="Script" path="res://scripts/station_creation.gd" id="2_bpb2d"]
+[ext_resource type="Script" path="res://scripts/area-creation.gd" id="2_q4dxd"]
 [ext_resource type="Script" path="res://scripts/camera_movement.gd" id="2_wg34b"]
 [ext_resource type="PackedScene" uid="uid://bcll0qejjkfl4" path="res://station.tscn" id="3_6vms3"]
 [ext_resource type="Script" path="res://scripts/osm_way.gd" id="4_d34ci"]
@@ -14,43 +15,11 @@
 script = ExtResource("4_d34ci")
 
 [node name="Areas" type="Node2D" parent="."]
-position = Vector2(12, -435)
-
-[node name="Area2D7" parent="Areas" instance=ExtResource("1_eo7to")]
-position = Vector2(-393, 432)
-
-[node name="Area2D8" parent="Areas" instance=ExtResource("1_eo7to")]
-position = Vector2(121, 432)
-
-[node name="Area2D9" parent="Areas" instance=ExtResource("1_eo7to")]
-position = Vector2(-136, 433)
-
-[node name="Area2D10" parent="Areas" instance=ExtResource("1_eo7to")]
-position = Vector2(-393, 689)
-
-[node name="Area2D11" parent="Areas" instance=ExtResource("1_eo7to")]
-position = Vector2(121, 689)
-
-[node name="Area2D12" parent="Areas" instance=ExtResource("1_eo7to")]
-position = Vector2(-136, 689)
+script = ExtResource("2_q4dxd")
 
 [node name="Area2D" parent="Areas" instance=ExtResource("1_eo7to")]
+visible = false
 position = Vector2(-393, -79)
-
-[node name="Area2D3" parent="Areas" instance=ExtResource("1_eo7to")]
-position = Vector2(121, -79)
-
-[node name="Area2D2" parent="Areas" instance=ExtResource("1_eo7to")]
-position = Vector2(-136, -79)
-
-[node name="Area2D4" parent="Areas" instance=ExtResource("1_eo7to")]
-position = Vector2(-393, 178)
-
-[node name="Area2D5" parent="Areas" instance=ExtResource("1_eo7to")]
-position = Vector2(121, 178)
-
-[node name="Area2D6" parent="Areas" instance=ExtResource("1_eo7to")]
-position = Vector2(-136, 178)
 
 [node name="Paths" type="Node2D" parent="."]
 script = ExtResource("5_lm6jf")
@@ -60,10 +29,10 @@ position = Vector2(0, -324)
 script = ExtResource("2_bpb2d")
 
 [node name="Station2" parent="Stations" instance=ExtResource("3_6vms3")]
-position = Vector2(-268, 303)
+position = Vector2(-256, 324)
 
 [node name="Station" parent="Stations" instance=ExtResource("3_6vms3")]
-position = Vector2(246, 307)
+position = Vector2(256, 324)
 
 [node name="Hud" parent="." instance=ExtResource("6_01tkc")]
 
