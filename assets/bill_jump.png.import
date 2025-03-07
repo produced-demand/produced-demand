@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dddtlyeijusfy"
-path="res://.godot/imported/area-bg.svg-ae2eb3e26313a31591572561d7cf0acb.ctex"
+uid="uid://d04j6x445yx57"
+path="res://.godot/imported/bill_jump.png-c07d68e734ed2244b9ad827eb0efd477.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/area-bg.svg"
-dest_files=["res://.godot/imported/area-bg.svg-ae2eb3e26313a31591572561d7cf0acb.ctex"]
+source_file="res://assets/bill_jump.png"
+dest_files=["res://.godot/imported/bill_jump.png-c07d68e734ed2244b9ad827eb0efd477.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

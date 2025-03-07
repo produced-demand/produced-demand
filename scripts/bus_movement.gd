@@ -132,8 +132,12 @@ func update_bus_position(change):
 	if not route_closed:
 		if parent.get_progress_ratio() >= .99:
 			reverse = true
+			get_node("Sprite").flip_h = 1
+			get_node("Label").position.x = -1
 		elif parent.get_progress_ratio() <= .01:
 			reverse = false
+			get_node("Sprite").flip_h = 0
+			get_node("Label").position.x = -28
 		if reverse:
 			change *= -1
 

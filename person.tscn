@@ -1,20 +1,48 @@
-[gd_scene load_steps=4 format=3 uid="uid://bisiolm2xfwd4"]
+[gd_scene load_steps=8 format=3 uid="uid://bisiolm2xfwd4"]
 
-[ext_resource type="Texture2D" uid="uid://b1br208ko0klf" path="res://assets/godot.svg" id="1_3k2g2"]
 [ext_resource type="Script" path="res://scripts/person_movement.gd" id="1_ewpfn"]
+[ext_resource type="Texture2D" uid="uid://do2aefig26sgc" path="res://assets/phil.png" id="2_ctg05"]
+[ext_resource type="Texture2D" uid="uid://btkkc2f5x2q6v" path="res://assets/phil_jump.png" id="3_v5img"]
+[ext_resource type="Texture2D" uid="uid://dtlsqo5hao1ww" path="res://assets/bill.png" id="4_hvl02"]
+[ext_resource type="Texture2D" uid="uid://d04j6x445yx57" path="res://assets/bill_jump.png" id="5_36262"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gjvie"]
 radius = 20.025
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i83te"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("4_hvl02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_36262")
+}],
+"loop": true,
+"name": &"bill",
+"speed": 0.5
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("2_ctg05")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_v5img")
+}],
+"loop": true,
+"name": &"phil",
+"speed": 0.5
+}]
 
 [node name="Person" type="Area2D"]
 scale = Vector2(0.52, 0.52)
 script = ExtResource("1_ewpfn")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1.90735e-06, -1.90735e-06)
-scale = Vector2(0.304688, 0.304688)
-texture = ExtResource("1_3k2g2")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.90735e-06, 1.90735e-06)
 shape = SubResource("CircleShape2D_gjvie")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_i83te")
+animation = &"phil"
+autoplay = "phil"

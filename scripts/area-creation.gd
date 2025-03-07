@@ -5,7 +5,7 @@ var area_scene = preload("res://area.tscn")
 var areas_array = []
 
 var last_tile_added = 0
-var time_before = 20
+var time_before = 18
 
 func _ready() -> void:
 	areas_array.resize(15)
@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 		return
 	if Game.get_time() > last_tile_added + time_before:
 		last_tile_added = Game.get_time()
-		time_before -= 1.75 # to make it become more difficult over time
+		time_before -= .3 # to make it become more difficult over time
 		add_tile_in_closest_circle()
 
 

@@ -24,6 +24,11 @@ Stations="*res://scripts/Stations.gd"
 MapData="*res://scripts/MapData.gd"
 Game="*res://scripts/Game.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [input]
 
 camera_move_right={

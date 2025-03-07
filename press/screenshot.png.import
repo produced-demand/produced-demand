@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpeiqjymuc8bk"
-path="res://.godot/imported/bus.svg-e23508ec357e3f05659e59f180e17b33.ctex"
+uid="uid://dq2enuqwl6ifl"
+path="res://.godot/imported/screenshot.png-ca44e59132e22bf3a35173349ec114bc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bus.svg"
-dest_files=["res://.godot/imported/bus.svg-e23508ec357e3f05659e59f180e17b33.ctex"]
+source_file="res://press/screenshot.png"
+dest_files=["res://.godot/imported/screenshot.png-ca44e59132e22bf3a35173349ec114bc.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

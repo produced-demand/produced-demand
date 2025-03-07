@@ -11,6 +11,12 @@ func _ready() -> void:
 	target_station = Stations.find_closest_station(self)
 	distance_walked = Stations.get_distance(get_global_position(), target_station.get_global_position())
 	generate_dream_station()
+	if (global_position.y - target_station.position.y) / (global_position.x - target_station.position.x) > 0:
+		get_node("AnimatedSprite").scale.x = -1
+	
+	# change icon
+	if randf() < .5:
+		get_node("AnimatedSprite").play("bill")
 
 func _process(delta: float) -> void:
 	if target_station and not at_station and not Game.paused:

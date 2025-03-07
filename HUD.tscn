@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_oxnlw"]
 [ext_resource type="Texture2D" uid="uid://b1br208ko0klf" path="res://assets/godot.svg" id="1_q3ry4"]
 [ext_resource type="Texture2D" uid="uid://b11wko8qeb1hi" path="res://assets/station.png" id="2_q4d68"]
-[ext_resource type="Texture2D" uid="uid://c0aiihk67lhda" path="res://assets/رسم.svg" id="3_8w138"]
+[ext_resource type="Texture2D" uid="uid://c0aiihk67lhda" path="res://assets/replay.svg" id="3_8w138"]
 [ext_resource type="Texture2D" uid="uid://mpigxyn284ih" path="res://assets/cancel.svg" id="4_amnxb"]
 [ext_resource type="Texture2D" uid="uid://sby4pyk41bm0" path="res://assets/info.png" id="4_wrmd3"]
 
