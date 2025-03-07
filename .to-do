@@ -1,13 +1,9 @@
-to-do
 mechanics
-- **dynamically generate people-making ground
-- **weight point score based on travel distance
-- **play again without reloading
-- make people generating ground spread over time
+- weight point score based on travel distance
+- play again without reloading
 
 features
 - saving (user://)
-- play/pause
 - add buses to routes after creation
 - upgrade station capacity
 - remove buses/stations/routes
@@ -18,6 +14,8 @@ ux
 - high score screen
 - title screen - choose play/tutorial
 - visually show max amount of routes and stations (w/ toolbox)
+- play/pause button
+- game paused screen
 
 ui
 - game over screen does not take full size
@@ -25,4 +23,14 @@ ui
 - visual feedback for unable to place stations too close
 - show option as mac alternitve
 - let user know zoom is an option
+- better character design
+- better bus design
 
+game
+- create readme for github
+- update itch page, new version and professional
+
+bugs
+- should switch direction at last point on station, not the current ratio implementation
+- double diamond issue - skips station when going through it twice in double pattern
+- buses that go straight down always pass through station
