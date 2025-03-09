@@ -1,6 +1,5 @@
 extends Node2D
 
-var max_routes: int = 6
 var routes: int = 0
 
 var creating_route: bool = false
@@ -11,6 +10,7 @@ var bus_scene = preload("res://bus.tscn")
 
 func _ready() -> void:
 	global_position = Vector2.ZERO
+	Game.set_route_creator(self)
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("start_create_route"):
@@ -21,12 +21,13 @@ func _input(event: InputEvent) -> void:
 				routes += 1
 				add_child(current_route)
 
-				# remove when manually adding buses is implemented
+				# remove when manually addingroutes += 1 buses is implemented
 				var bus = create_bus(current_route.get_is_closed())
 				current_route.add_bus(bus)
 				
 				Stations.set_route_being_created(false)
 				Game.hud.toggle_creating_route_indicator()
+				Game.hud.update_route_label();
 
 				# remove route creation stuff
 				creating_route = false
@@ -34,7 +35,7 @@ func _input(event: InputEvent) -> void:
 				current_line = null
 		else:
 			var is_station_at_position = Stations.get_index_of_station_at_position(mouse_position) != -1
-			if is_station_at_position and routes < max_routes:
+			if is_station_at_position and routes < Game.get_max_routes():
 				creating_route = true
 				create_route(mouse_position)
 				Stations.set_route_being_created(true)
@@ -131,3 +132,6 @@ func create_bus(route_is_closed):
 	bus.set_route_closed(route_is_closed)
 	follow_path.add_child(bus)
 	return follow_path
+
+func get_route_count():
+	return routes

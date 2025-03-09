@@ -12,11 +12,22 @@ var is_dragging : bool = false
 
 func _ready() -> void:
 	zoom_target = zoom
+	Game.register_camera(self)
 
 func _process(delta: float) -> void:
 	scroll_zoom(delta)
 	simple_pan(delta)
 	click_and_pan()
+
+func zoom_in():
+	zoom_target *= zoom_in_multiplier
+	consider_limits()
+	zoom = zoom.lerp(zoom_target, zoom_speed * .05)
+
+func zoom_out():
+	zoom_target *= zoom_out_multiplier
+	consider_limits()
+	zoom = zoom.lerp(zoom_target, zoom_speed * .05)
 
 func scroll_zoom(delta):
 	if Input.is_action_just_pressed("camera_zoom_in"):
@@ -24,14 +35,16 @@ func scroll_zoom(delta):
 	if Input.is_action_just_pressed("camera_zoom_out"):
 		zoom_target *= zoom_out_multiplier
 
+	consider_limits()
+	zoom = zoom.lerp(zoom_target, zoom_speed * delta)
+
+func consider_limits():
 	if zoom_target.x > 10:
 		zoom_target.x = 10
 		zoom_target.y = 10;
 	if zoom_target.x < .5:
 		zoom_target.x = .5
 		zoom_target.y = .5
-	
-	zoom = zoom.lerp(zoom_target, zoom_speed * delta)
 
 func simple_pan(delta):
 	var move_amount = Vector2.ZERO

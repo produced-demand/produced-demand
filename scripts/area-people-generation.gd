@@ -12,7 +12,7 @@ func _process(_delta: float) -> void:
 	var now = Time.get_ticks_msec()
 	if now - last_ran > Game.people_creation_speed and not Game.paused:
 		last_ran = now
-		if randi_range(1, 3) == 1:
+		if randf() > .3:
 			generate_person()
 
 

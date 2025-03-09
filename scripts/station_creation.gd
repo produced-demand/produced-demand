@@ -12,5 +12,6 @@ func generate_station(new_position):
 		return
 
 	var station = station_scene.instantiate()
-	station.position = new_position
-	get_tree().get_root().add_child(station)
+	station.global_position = new_position
+	get_tree().get_root().get_node("level").add_child(station)
+	Game.hud.update_bus_label()

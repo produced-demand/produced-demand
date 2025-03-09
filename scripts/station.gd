@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func add_person(person):
 	people += 1
-	if people > Stations.max_people_at_station:
+	if people > Game.max_people_at_station:
 		Game.end_game(people)
 	dream_stations.append(person.get_dream_station())
 	person.joined_station() # removes person

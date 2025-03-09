@@ -1,113 +1,82 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfduee8lnq0v2"]
+[gd_scene load_steps=12 format=3 uid="uid://cfduee8lnq0v2"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_oxnlw"]
-[ext_resource type="Texture2D" uid="uid://b1br208ko0klf" path="res://assets/godot.svg" id="1_q3ry4"]
 [ext_resource type="Texture2D" uid="uid://b11wko8qeb1hi" path="res://assets/station.png" id="2_q4d68"]
-[ext_resource type="Texture2D" uid="uid://c0aiihk67lhda" path="res://assets/replay.svg" id="3_8w138"]
+[ext_resource type="Texture2D" uid="uid://c0aiihk67lhda" path="res://assets/icons/replay.svg" id="3_8w138"]
+[ext_resource type="Texture2D" uid="uid://do2aefig26sgc" path="res://assets/phil.png" id="4_4x6j7"]
 [ext_resource type="Texture2D" uid="uid://mpigxyn284ih" path="res://assets/cancel.svg" id="4_amnxb"]
 [ext_resource type="Texture2D" uid="uid://sby4pyk41bm0" path="res://assets/info.png" id="4_wrmd3"]
+[ext_resource type="Texture2D" uid="uid://cduiykqpr8xel" path="res://assets/coin.png" id="5_qrimw"]
+[ext_resource type="Texture2D" uid="uid://dt2njfqg3ajt6" path="res://assets/icons/zoom_in.svg" id="6_s3kkg"]
+[ext_resource type="Texture2D" uid="uid://i03acig823h" path="res://assets/bus.png" id="6_up8ug"]
+[ext_resource type="Texture2D" uid="uid://c0ptu35vowkkf" path="res://assets/icons/zoom_out.svg" id="7_vm5a1"]
+[ext_resource type="Texture2D" uid="uid://cglqydyhkxs8a" path="res://assets/icons/pause.svg" id="8_1voem"]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_oxnlw")
 
-[node name="End" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -576.0
-offset_top = -324.0
-offset_right = -576.0
-offset_bottom = -324.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="End"]
-layout_mode = 0
-offset_top = -0.99999
-offset_right = 40.0
-offset_bottom = 39.0
-scale = Vector2(28.8, 16.24)
-color = Color(1, 0.172549, 0, 1)
-
-[node name="Over" type="Label" parent="End"]
-layout_mode = 0
-offset_left = 392.0
-offset_right = 465.0
-offset_bottom = 96.0
-scale = Vector2(5, 5)
-theme_override_font_sizes/font_size = 70
-text = "😞"
-
-[node name="TextureRect" type="TextureRect" parent="End"]
-layout_mode = 0
-offset_left = 433.0
-offset_top = 489.0
-offset_right = 473.0
-offset_bottom = 529.0
-scale = Vector2(3.30178, 3.30178)
-texture = ExtResource("2_q4d68")
-
-[node name="HowManyOver" type="Label" parent="End"]
-layout_mode = 0
-offset_left = 465.0
-offset_top = 569.0
-offset_right = 530.0
-offset_bottom = 622.0
-theme_override_font_sizes/font_size = 38
-text = "120"
-
-[node name="ComparedToMax" type="Label" parent="End"]
-layout_mode = 0
-offset_left = 583.0
-offset_top = 569.0
-offset_right = 680.0
-offset_bottom = 622.0
-theme_override_font_sizes/font_size = 38
-text = "> 120"
-
-[node name="PlayAgainButton" type="Button" parent="End"]
-visible = false
-layout_mode = 0
-offset_left = 530.0
-offset_top = 390.0
-offset_right = 610.0
-offset_bottom = 470.0
-
-[node name="Sprite2D" type="Sprite2D" parent="End/PlayAgainButton"]
-visible = false
-position = Vector2(39, 40)
-scale = Vector2(0.173151, 0.173151)
-texture = ExtResource("3_8w138")
-
-[node name="Score" type="Control" parent="."]
+[node name="Resources" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ScoreIcon" type="Sprite2D" parent="Score"]
-position = Vector2(40, 34)
-scale = Vector2(0.477812, 0.477812)
-texture = ExtResource("1_q3ry4")
+[node name="ColorRect" type="ColorRect" parent="Resources"]
+layout_mode = 0
+offset_left = 946.0
+offset_right = 986.0
+offset_bottom = 40.0
+scale = Vector2(5.16, 2.6)
+color = Color(0.929715, 0.929715, 0.929715, 1)
 
-[node name="ScoreLabel" type="Label" parent="Score"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.088
-anchor_top = 0.002
-anchor_right = 0.136
-anchor_bottom = 0.037
-offset_left = 77.48
-offset_top = -0.08
-offset_right = 98.56
-offset_bottom = 53.52
-scale = Vector2(1.18529, 1.18529)
+[node name="Stations" type="Control" parent="Resources"]
+anchors_preset = 0
+offset_left = 915.0
+offset_right = 915.0
+
+[node name="Icon" type="TextureRect" parent="Resources/Stations"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 7.0
+offset_right = 184.0
+offset_bottom = 23.0
+scale = Vector2(2.46534, 2.46534)
+texture = ExtResource("2_q4d68")
+
+[node name="Label" type="Label" parent="Resources/Stations"]
+layout_mode = 0
+offset_left = 48.0
+offset_right = 133.0
+offset_bottom = 50.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 40
-text = "0"
+theme_override_font_sizes/font_size = 36
+text = " 2/10"
+
+[node name="Routes" type="Control" parent="Resources"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 915.0
+offset_top = 46.0
+offset_right = 915.0
+offset_bottom = 46.0
+
+[node name="Icon" type="TextureRect" parent="Resources/Routes"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 7.0
+offset_right = 182.0
+offset_bottom = 23.0
+scale = Vector2(2.46534, 2.46534)
+texture = ExtResource("6_up8ug")
+
+[node name="Label" type="Label" parent="Resources/Routes"]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 149.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "0/8"
 
 [node name="Indicators" type="Control" parent="."]
 layout_mode = 3
@@ -192,6 +161,192 @@ position = Vector2(22.3404, 19.8113)
 scale = Vector2(0.148753, 0.125219)
 texture = ExtResource("4_amnxb")
 
+[node name="Controls" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 586.0
+offset_right = 40.0
+offset_bottom = 626.0
+
+[node name="PlayPause" type="Button" parent="Controls"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 5.99994
+offset_right = 58.0
+offset_bottom = 55.9999
+
+[node name="Icon" type="TextureRect" parent="Controls/PlayPause"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.25929, 1.25929)
+texture = ExtResource("8_1voem")
+
+[node name="ZoomIn" type="Button" parent="Controls"]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 5.99994
+offset_right = 117.0
+offset_bottom = 55.9999
+
+[node name="TextureRect" type="TextureRect" parent="Controls/ZoomIn"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.28, 1.28)
+texture = ExtResource("6_s3kkg")
+
+[node name="ZoomOut" type="Button" parent="Controls"]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 6.0
+offset_right = 168.0
+offset_bottom = 56.0
+
+[node name="TextureRect" type="TextureRect" parent="Controls/ZoomOut"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.28, 1.28)
+texture = ExtResource("7_vm5a1")
+
+[node name="End" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -576.0
+offset_bottom = -324.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="End"]
+layout_mode = 0
+offset_top = -0.99999
+offset_right = 40.0
+offset_bottom = 39.0
+scale = Vector2(28.8, 16.24)
+color = Color(1, 0.172549, 0, 1)
+
+[node name="Over" type="Label" parent="End"]
+layout_mode = 0
+offset_left = 392.0
+offset_right = 465.0
+offset_bottom = 96.0
+scale = Vector2(5, 5)
+theme_override_font_sizes/font_size = 70
+text = "😞"
+
+[node name="TextureRect" type="TextureRect" parent="End"]
+layout_mode = 0
+offset_left = 433.0
+offset_top = 489.0
+offset_right = 473.0
+offset_bottom = 529.0
+scale = Vector2(3.30178, 3.30178)
+texture = ExtResource("2_q4d68")
+
+[node name="HowManyOver" type="Label" parent="End"]
+layout_mode = 0
+offset_left = 465.0
+offset_top = 569.0
+offset_right = 530.0
+offset_bottom = 622.0
+theme_override_font_sizes/font_size = 38
+text = "120"
+
+[node name="ComparedToMax" type="Label" parent="End"]
+layout_mode = 0
+offset_left = 583.0
+offset_top = 569.0
+offset_right = 680.0
+offset_bottom = 622.0
+theme_override_font_sizes/font_size = 38
+text = "> 120"
+
+[node name="PlayAgainButton" type="Button" parent="End"]
+layout_mode = 0
+offset_left = 530.0
+offset_top = 390.0
+offset_right = 610.0
+offset_bottom = 470.0
+mouse_default_cursor_shape = 2
+
+[node name="Sprite2D" type="TextureRect" parent="End/PlayAgainButton"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 5.0
+offset_right = 27.0
+offset_bottom = 29.0
+scale = Vector2(3, 3)
+texture = ExtResource("3_8w138")
+
+[node name="Info" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Score" type="Control" parent="Info"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScoreIcon" type="Sprite2D" parent="Info/Score"]
+position = Vector2(40, 34)
+scale = Vector2(1.43781, 1.43781)
+texture = ExtResource("4_4x6j7")
+
+[node name="ScoreLabel" type="Label" parent="Info/Score"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.088
+anchor_top = 0.002
+anchor_right = 0.136
+anchor_bottom = 0.037
+offset_left = 77.48
+offset_top = -0.08
+offset_right = 98.56
+offset_bottom = 53.52
+scale = Vector2(1.18529, 1.18529)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "0"
+
+[node name="Coins" type="Control" parent="Info"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Icon" type="TextureRect" parent="Info/Coins"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 70.0
+offset_right = 61.0
+offset_bottom = 110.0
+texture = ExtResource("5_qrimw")
+
+[node name="Label" type="Label" parent="Info/Coins"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.088
+anchor_top = 0.002
+anchor_right = 0.136
+anchor_bottom = 0.037
+offset_left = 77.48
+offset_top = 56.92
+offset_right = 98.56
+offset_bottom = 110.52
+scale = Vector2(1.18529, 1.18529)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "0"
+
 [node name="Start" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 8
@@ -208,11 +363,10 @@ grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="Start"]
 layout_mode = 0
-offset_left = 131.0
-offset_top = 64.0
-offset_right = 171.0
-offset_bottom = 104.0
-scale = Vector2(22.84, 13.76)
+offset_top = 2.0
+offset_right = 40.0
+offset_bottom = 42.0
+scale = Vector2(28.8, 16.24)
 
 [node name="HowToGraphic" type="TextureRect" parent="Start"]
 layout_mode = 0
@@ -232,6 +386,9 @@ offset_bottom = 551.0
 scale = Vector2(1.77453, 1.77453)
 text = "->"
 
-[connection signal="pressed" from="End/PlayAgainButton" to="." method="_on_play_again_pressed"]
 [connection signal="pressed" from="Indicators/CreatingRouteIndicator/CancelRouteCreation" to="." method="_on_cancel_route_button_pressed"]
+[connection signal="pressed" from="Controls/PlayPause" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="Controls/ZoomIn" to="." method="_on_zoom_in_pressed"]
+[connection signal="pressed" from="Controls/ZoomOut" to="." method="_on_zoom_out_pressed"]
+[connection signal="pressed" from="End/PlayAgainButton" to="." method="_on_play_again_pressed"]
 [connection signal="pressed" from="Start/StartButton" to="." method="_on_start_button_pressed"]

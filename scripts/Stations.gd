@@ -1,10 +1,11 @@
 extends Node
 
-var max_stations = 10
 var stations = []
-var max_people_at_station = 120
 
 var route_being_created = false
+
+func reset():
+	stations = []
 
 func add_station(station_node):
 	stations.append(station_node)
@@ -26,7 +27,7 @@ func can_add_station(new_position):
 	if station_at(new_position):
 		print("there is a station nearby, cannot place a new one here")
 		return false
-	if len(stations) + 1 <= max_stations and not route_being_created:
+	if len(stations) + 1 <= Game.get_max_stations() and not route_being_created:
 		return true
 	else:
 		return false
@@ -64,3 +65,6 @@ func get_random_station_excluding(excluded_station):
 
 func set_route_being_created(value):
 	route_being_created = value
+
+func get_station_count():
+	return len(stations)
