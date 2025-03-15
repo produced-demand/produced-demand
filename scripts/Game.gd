@@ -39,9 +39,14 @@ func end_game(people_overrun_by):
 	hud.show_end()
 	paused = true
 
+func win():
+	hud.show_win()
+
 func add_people_delivered(amount):
 	people_delivered += amount
 	hud.set_score(people_delivered)
+	if people_delivered > 3000:
+		Game.win()
 
 func start():
 	paused = false

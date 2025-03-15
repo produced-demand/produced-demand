@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dq2enuqwl6ifl"
-path="res://.godot/imported/screenshot.png-ca44e59132e22bf3a35173349ec114bc.ctex"
+uid="uid://d2g1gakr4yv0l"
+path="res://.godot/imported/frill_jump.png-1bb46c03975701231b08a3482a5bf4db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://press/screenshot.png"
-dest_files=["res://.godot/imported/screenshot.png-ca44e59132e22bf3a35173349ec114bc.ctex"]
+source_file="res://assets/frill_jump.png"
+dest_files=["res://.godot/imported/frill_jump.png-1bb46c03975701231b08a3482a5bf4db.ctex"]
 
 [params]
 

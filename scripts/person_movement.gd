@@ -15,8 +15,11 @@ func _ready() -> void:
 		get_node("AnimatedSprite").scale.x = -1
 	
 	# change icon
-	if randf() < .5:
+	var rand = randf()
+	if rand < .3:
 		get_node("AnimatedSprite").play("bill")
+	elif rand < .7:
+		get_node("AnimatedSprite").play("frill")
 
 func _process(delta: float) -> void:
 	if target_station and not at_station and not Game.paused:

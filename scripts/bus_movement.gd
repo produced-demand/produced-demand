@@ -8,7 +8,9 @@ var route_closed: bool
 var last_point
 var last_station
 
-var current_station
+var current_station = null
+var reverse_when_complete = false
+var restart_when_complete = false
 
 var time_arrived_at_station = -1
 var wait_time
@@ -27,8 +29,11 @@ func _ready() -> void:
 	speed = top_speed
 	parent = get_parent()
 	route = parent.get_parent()
-	parent.progress_ratio = 0 # 0-1
-	last_point = route.get_closest_point(self)
+	parent.progress = 0
+	var closest_point = route.get_closest_point(self)
+	last_point = closest_point
+	current_station = Stations.get_station_at_position(closest_point.position)
+	exit_station()
 
 func _process(delta: float) -> void:
 	if Game.paused:
@@ -37,6 +42,16 @@ func _process(delta: float) -> void:
 	if is_at_station():
 		collect_people()
 		if Time.get_ticks_msec() - time_arrived_at_station > wait_time:
+			if reverse_when_complete:
+				reverse = not reverse
+				reverse_when_complete = false
+
+			if reverse:
+				get_node("Sprite").flip_h = 1
+				get_node("Label").position.x = -1
+			else:
+				get_node("Sprite").flip_h = 0
+				get_node("Label").position.x = -28
 			exit_station()
 
 	var speed = update_bus_speed(delta)
@@ -54,7 +69,7 @@ func entered_station_range(station):
 				acceleration = (0 - pow(speed, 2)) / (2 * distance_to_station)
 
 func exited_station_range(station):
-	if route.has_station(station) and last_station == station:
+	if route.has_station(station) and last_station == station: # only run this if properly left last
 		acceleration = 0
 		speed = top_speed
 
@@ -70,10 +85,10 @@ func entered_station(station):
 		wait_time = current_station.get_wait_time(get_open_seats())
 		acceleration = 0
 		speed = 0
+		print("stopped") # does not recover if looped, and is last point (issues is when going)
 
 func exit_station():
 	acceleration = ((pow(top_speed, 2)) / (2 * 80))
-	last_point = route.get_point_at_position(current_station.global_position)
 	last_station = current_station
 	current_station = null
 	time_arrived_at_station = -1
@@ -130,18 +145,19 @@ func update_bus_speed(delta):
 
 func update_bus_position(change):
 	if not route_closed:
-		if parent.get_progress_ratio() >= .99:
-			reverse = true
-			get_node("Sprite").flip_h = 1
-			get_node("Label").position.x = -1
-		elif parent.get_progress_ratio() <= .01:
-			reverse = false
-			get_node("Sprite").flip_h = 0
-			get_node("Label").position.x = -28
 		if reverse:
 			change *= -1
 
 	var new_progress = parent.get_progress() + change
+	if new_progress > parent.get_parent().curve.get_baked_length():
+		new_progress = parent.get_parent().curve.get_baked_length()
+		if not route_closed:
+			reverse_when_complete = true
+		elif restart_when_complete:
+			new_progress = 0
+			speed = top_speed
+			restart_when_complete = false
+
 	parent.set_progress(new_progress)
 
 func collect_people():
@@ -164,3 +180,9 @@ func on_route(given_route):
 
 func set_last_point(point):
 	last_point = point
+	if route.is_end_point(point):
+		if not route_closed:
+			print("no-return")
+			reverse_when_complete = true
+		else: # route is closed
+			restart_when_complete = true

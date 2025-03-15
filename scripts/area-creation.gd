@@ -7,6 +7,8 @@ var areas_array = []
 var last_tile_added = 0
 var time_before = 18
 
+var area_size = 250
+
 func _ready() -> void:
 	areas_array.resize(15)
 	for i in range(0, len(areas_array)):
@@ -15,7 +17,6 @@ func _ready() -> void:
 		empty_array.fill(null)
 		areas_array[i] = empty_array
 
-	var area_size = get_tree().get_root().get_node("level").get_node("Areas").get_node("Area2D").get_node("CollisionShape2D").shape.get_rect().size.x
 	var position_x = 0 - area_size * 1.5
 	var position_y = 0 - area_size * 1.5
 	
@@ -26,14 +27,15 @@ func _ready() -> void:
 			position_x += area_size
 		position_x = 0 - area_size * 1.5
 		position_y += area_size
-		
+	
+	PeopleGenerator.register_areas_script(self)
 
 func _process(delta: float) -> void:
 	if Game.paused:
 		return
 	if Game.get_time() > last_tile_added + time_before:
 		last_tile_added = Game.get_time()
-		time_before -= .3 # to make it become more difficult over time
+		time_before -= .3 # to increase speed of tile generation
 		add_tile_in_closest_circle()
 
 
@@ -73,8 +75,6 @@ func generate_area(pos):
 	return area
 
 func get_position_for_area(i, j):
-	var area_size = get_tree().get_root().get_node("level").get_node("Areas").get_node("Area2D").get_node("CollisionShape2D").shape.get_rect().size.x
-
 	var center_i = floor(len(areas_array) / 2)
 	var center_j = floor(len(areas_array) / 2)
 

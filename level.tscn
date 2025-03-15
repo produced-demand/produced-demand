@@ -1,25 +1,21 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfwyjyjoj3g8t"]
+[gd_scene load_steps=8 format=3 uid="uid://dfwyjyjoj3g8t"]
 
-[ext_resource type="PackedScene" uid="uid://cueyy45tahn3s" path="res://area.tscn" id="1_eo7to"]
-[ext_resource type="Script" path="res://scripts/station_creation.gd" id="2_bpb2d"]
-[ext_resource type="Script" path="res://scripts/area-creation.gd" id="2_q4dxd"]
-[ext_resource type="Script" path="res://scripts/camera_movement.gd" id="2_wg34b"]
+[ext_resource type="Script" uid="uid://5g0eflln0yup" path="res://scripts/station_creation.gd" id="2_bpb2d"]
+[ext_resource type="Script" uid="uid://b6e7j3fgqvrtr" path="res://scripts/area-creation.gd" id="2_q4dxd"]
+[ext_resource type="Script" uid="uid://uchro8mius6d" path="res://scripts/camera_movement.gd" id="2_wg34b"]
 [ext_resource type="PackedScene" uid="uid://bcll0qejjkfl4" path="res://station.tscn" id="3_6vms3"]
-[ext_resource type="Script" path="res://scripts/osm_way.gd" id="4_d34ci"]
-[ext_resource type="Script" path="res://scripts/route_creation.gd" id="5_lm6jf"]
+[ext_resource type="Script" uid="uid://k3nvtfjlyj4m" path="res://scripts/osm_way.gd" id="4_d34ci"]
+[ext_resource type="Script" uid="uid://dycew0hxvcv3j" path="res://scripts/route_creation.gd" id="5_lm6jf"]
 [ext_resource type="PackedScene" uid="uid://cfduee8lnq0v2" path="res://HUD.tscn" id="6_01tkc"]
 
 [node name="level" type="Node2D"]
 
 [node name="OSMWays" type="Node2D" parent="."]
+visible = false
 script = ExtResource("4_d34ci")
 
 [node name="Areas" type="Node2D" parent="."]
 script = ExtResource("2_q4dxd")
-
-[node name="Area2D" parent="Areas" instance=ExtResource("1_eo7to")]
-visible = false
-position = Vector2(-393, -79)
 
 [node name="Paths" type="Node2D" parent="."]
 script = ExtResource("5_lm6jf")
@@ -28,10 +24,10 @@ script = ExtResource("5_lm6jf")
 position = Vector2(0, -324)
 script = ExtResource("2_bpb2d")
 
-[node name="Station2" parent="Stations" instance=ExtResource("3_6vms3")]
+[node name="StationLeft" parent="Stations" instance=ExtResource("3_6vms3")]
 position = Vector2(-256, 324)
 
-[node name="Station" parent="Stations" instance=ExtResource("3_6vms3")]
+[node name="StationRight" parent="Stations" instance=ExtResource("3_6vms3")]
 position = Vector2(256, 324)
 
 [node name="Hud" parent="." instance=ExtResource("6_01tkc")]

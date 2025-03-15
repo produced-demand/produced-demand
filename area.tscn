@@ -1,12 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cueyy45tahn3s"]
-
-[ext_resource type="Script" path="res://scripts/area-people-generation.gd" id="1_w0olw"]
+[gd_scene load_steps=2 format=3 uid="uid://cueyy45tahn3s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hk177"]
 size = Vector2(250, 250)
 
 [node name="Area2D" type="Area2D"]
-script = ExtResource("1_w0olw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(128, 128)

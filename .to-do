@@ -1,6 +1,5 @@
 mechanics
 - weight point score based on travel distance
-- play again without reloading
 
 features
 - saving (user://)
@@ -10,27 +9,14 @@ features
 - move routes
 - should not slow/stop at station when full and nobody wants to go there
 
-ux
+ux/ux
 - high score screen
 - title screen - choose play/tutorial
-- visually show max amount of routes and stations (w/ toolbox)
-- play/pause button
-- game paused screen
-
-ui
-- game over screen does not take full size
-- zoom in/out buttons
 - visual feedback for unable to place stations too close
 - show option as mac alternitve
-- let user know zoom is an option
-- better character design
-- better bus design
 
-game
-- create readme for github
-- update itch page, new version and professional
-
-bugs
+difficult bugs I don't want to deal with
 - should switch direction at last point on station, not the current ratio implementation
 - double diamond issue - skips station when going through it twice in double pattern
 - buses that go straight down always pass through station
+- bus does not pick up people when stations are too close

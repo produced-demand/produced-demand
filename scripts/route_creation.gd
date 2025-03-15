@@ -95,11 +95,11 @@ func add_point_to_route(point_position, is_last_point):
 	var closes_loop = false
 
 	# if in the same position as the last point
-	if abs(last_point.x - point_position.x) <= 5 and abs(last_point.x - point_position.x) <= 5:
+	if abs(last_point.x - point_position.x) <= 5 and abs(last_point.y - point_position.y) <= 5:
 		print("too close to last")
 		return false
 	# if in the same position as the first point and this is the final point
-	if is_last_point and abs(first_point.x - point_position.x) <= 25 and abs(first_point.x - point_position.x) <= 25:
+	if is_last_point and abs(first_point.x - point_position.x) <= 25 and abs(first_point.y - point_position.y) <= 25:
 		closes_loop = true
 	# if the new point is the same as the only other point
 	if len(points_on_route) == 1 and first_point == point_position:
@@ -123,6 +123,7 @@ func add_point_to_route(point_position, is_last_point):
 	if is_last_point:
 		current_route.set_is_closed(closes_loop)
 
+
 	return true
 
 
@@ -131,6 +132,7 @@ func create_bus(route_is_closed):
 	var bus = bus_scene.instantiate()
 	bus.set_route_closed(route_is_closed)
 	follow_path.add_child(bus)
+	#follow_path.loop = route_is_closed
 	return follow_path
 
 func get_route_count():

@@ -73,7 +73,13 @@ func get_closest_point(bus):
 
 func get_distance(first_position, second_position):
 	return abs(first_position.distance_to(second_position))
-	#return abs(sqrt((second_position.y - first_position.y) * (second_position.y - first_position.y) + (second_position.x - first_position.x) * (second_position.x - first_position.x))) 
+
+func is_end_point(point):
+	var index = points.find(point, 0)
+	if index == 0 or index == len(points) - 1:
+		return true
+	else:
+		return false
 
 func get_next_point(point, reverse: bool):
 	var index = points.find(point, 0)
