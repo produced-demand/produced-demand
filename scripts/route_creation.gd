@@ -60,7 +60,7 @@ func cancel_route_creation():
 
 func create_route(start_position):
 	var route = Path2D.new()
-	var route_script = load("res://scripts/route.gd")
+	var route_script = preload("res://scripts/route.gd")
 	route.script = route_script
 	current_route = route
 
@@ -76,7 +76,6 @@ func create_route(start_position):
 	# live preview
 	var line = Line2D.new()
 	line.default_color = Color(randf(), randf(), randf())
-	line.set_end_cap_mode(2)
 	line.width = 6
 	current_line = line
 	line.add_point(start_position)

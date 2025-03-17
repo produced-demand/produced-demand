@@ -42,9 +42,9 @@ func consider_limits():
 	if zoom_target.x > 10:
 		zoom_target.x = 10
 		zoom_target.y = 10;
-	if zoom_target.x < .5:
-		zoom_target.x = .5
-		zoom_target.y = .5
+	if zoom_target.x < .35:
+		zoom_target.x = .35
+		zoom_target.y = .35
 
 func simple_pan(delta):
 	var move_amount = Vector2.ZERO

@@ -10,11 +10,11 @@ func reset():
 func add_station(station_node):
 	stations.append(station_node)
 
-func find_closest_station(person):
+func find_closest_station(given_position: Vector2):
 	var target = stations[0]
-	var target_distance = get_distance(stations[0].get_global_position(), person.get_global_position())
+	var target_distance = get_distance(stations[0].get_global_position(), given_position)
 	for station in stations:
-		var distance = get_distance(station.get_global_position(), person.get_global_position())
+		var distance = get_distance(station.get_global_position(), given_position)
 		if distance < target_distance:
 			target = station
 			target_distance = distance
@@ -26,6 +26,8 @@ func get_distance(first_position, second_position):
 func can_add_station(new_position):
 	if station_at(new_position):
 		print("there is a station nearby, cannot place a new one here")
+		var station = get_station_at(new_position)
+		station.shake()
 		return false
 	if len(stations) + 1 <= Game.get_max_stations() and not route_being_created:
 		return true
@@ -39,6 +41,14 @@ func station_at(given_position):
 		if diff_x < 120 and diff_y < 120:
 			return true
 	return false
+
+func get_station_at(given_position):
+	for station in stations:
+		var diff_x = abs(station.global_position.x - given_position.x)
+		var diff_y = abs(station.global_position.y - given_position.y)
+		if diff_x < 120 and diff_y < 120:
+			return station
+	return null
 
 func get_index_of_station_at_position(given_position):
 	for station_index in range(0, len(stations)):

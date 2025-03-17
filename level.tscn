@@ -15,6 +15,7 @@ visible = false
 script = ExtResource("4_d34ci")
 
 [node name="Areas" type="Node2D" parent="."]
+position = Vector2(0, -1)
 script = ExtResource("2_q4dxd")
 
 [node name="Paths" type="Node2D" parent="."]

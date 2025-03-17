@@ -27,10 +27,10 @@ func has_station(station):
 func get_station_count():
 	return len(stations)
 
-func add_point_at_position(point, atStation):
+func add_point_at_position(point, at_station):
 	points.append({
 		"position": point,
-		"atStation": atStation
+		"atStation": at_station
 	})
 
 	#var marker = Sprite2D.new()
@@ -38,13 +38,20 @@ func add_point_at_position(point, atStation):
 	#marker.global_position = point
 	#add_child(marker)
 	#marker.scale = Vector2(.25, .25)
-	#
-	# add collider
+
+
+	# add collider - SHOULD BE VISIBLE IN SOME WAY WHEN MOVING (GIVE MOVE CURSOR ICON OR SOMETHING)
 	var circle_shape = CircleShape2D.new()
 	circle_shape.radius = 20
 
 	var area = Area2D.new()
 	add_child(area)
+	#if not at_station:
+		#area.set_script(load("res://scripts/dragging.gd"))
+		#area.set_function(point_moved)
+		#area.set_radius(circle_shape.radius)
+		#area.set_shape(area.Shape.CIRCLE)
+		#area.set_data(len(points) - 1)
 
 	var area_collision_shape = CollisionShape2D.new()
 	area_collision_shape.shape = circle_shape
@@ -53,6 +60,16 @@ func add_point_at_position(point, atStation):
 	
 	area.connect("area_entered", _on_bus_entered.bind(len(points) - 1))
 
+func point_moved(obj):
+	var new_position: Vector2 = obj.pos
+	var point_index = obj.data
+	#var point_index = get_point_index(point)
+	#print(point)
+	print("var " + str(point_index))
+
+	self.curve.set_point_position(point_index, new_position)
+	visual_line.set_point_position(point_index, new_position)
+
 func _on_bus_entered(area, point_index):
 	if area.name == "BusCollider":
 		var bus = area.get_parent()
@@ -60,12 +77,14 @@ func _on_bus_entered(area, point_index):
 			if self.get_next_point(bus.last_point, bus.reverse) == points[point_index]:
 				bus.set_last_point(points[point_index])
 
+#func get_point_index(point):
+	#return points.find(point, 0)
 
-func get_closest_point(bus):
+func get_closest_point(pos):
 	var closest = points[0]
-	var target_distance = get_distance(points[0].position, bus.get_global_position())
+	var target_distance = get_distance(points[0].position, pos)
 	for point in points:
-		var distance = get_distance(point.position, bus.get_global_position())
+		var distance = get_distance(point.position, pos)
 		if distance < target_distance:
 			closest = point
 			target_distance = distance

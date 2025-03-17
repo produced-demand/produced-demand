@@ -30,7 +30,7 @@ func _ready() -> void:
 	parent = get_parent()
 	route = parent.get_parent()
 	parent.progress = 0
-	var closest_point = route.get_closest_point(self)
+	var closest_point = route.get_closest_point(global_position)
 	last_point = closest_point
 	current_station = Stations.get_station_at_position(closest_point.position)
 	exit_station()
@@ -54,8 +54,8 @@ func _process(delta: float) -> void:
 				get_node("Label").position.x = -28
 			exit_station()
 
-	var speed = update_bus_speed(delta)
-	var change = speed * delta
+	var new_speed = update_bus_speed(delta)
+	var change = new_speed * delta
 	update_bus_position(change)
 
 # ======================================================
@@ -69,7 +69,7 @@ func entered_station_range(station):
 				acceleration = (0 - pow(speed, 2)) / (2 * distance_to_station)
 
 func exited_station_range(station):
-	if route.has_station(station) and last_station == station: # only run this if properly left last
+	if route.has_station(station) and last_station == station: # only run this if properly left last - THIS IS THE CAUSE OF NOT PICKING UP WHEN TOO CLOSE ISSUE
 		acceleration = 0
 		speed = top_speed
 
@@ -77,15 +77,16 @@ func entered_station(station):
 	if station == current_station:
 		time_arrived_at_station = Time.get_ticks_msec()
 
+		# people are removed, their data should be saved
 		var people_delivered = current_station.deliver_people(occupants)
 		for person in people_delivered:
 			var person_index = occupants.find(person, 0)
 			occupants.remove_at(person_index)
+			PeopleGenerator.regenerate_person(current_station.global_position, person)
 
 		wait_time = current_station.get_wait_time(get_open_seats())
 		acceleration = 0
 		speed = 0
-		print("stopped") # does not recover if looped, and is last point (issues is when going)
 
 func exit_station():
 	acceleration = ((pow(top_speed, 2)) / (2 * 80))
@@ -100,7 +101,7 @@ func is_approaching_station(station):
 	if not Stations.stations[Stations.get_index_of_station_at_position(next_point_with_station.position)] == station:
 		return false
 
-	var radius = station.get_node("Nearby").get_node("Collider").shape.radius * .6
+	var radius = station.get_node("Nearby").get_node("Collider").shape.radius
 
 	var current_point = route.get_next_point(last_point, reverse)
 	while current_point != next_point_with_station:
@@ -112,7 +113,7 @@ func is_approaching_station(station):
 	return true
 
 
-func get_distance_to_station(station):
+func get_distance_to_station(_station):
 	var next_point = route.get_next_point(last_point, reverse)
 	var distance_to = distance(global_position, next_point.position)
 	if next_point.atStation:
@@ -182,7 +183,6 @@ func set_last_point(point):
 	last_point = point
 	if route.is_end_point(point):
 		if not route_closed:
-			print("no-return")
 			reverse_when_complete = true
 		else: # route is closed
 			restart_when_complete = true

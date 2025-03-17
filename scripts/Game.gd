@@ -2,7 +2,8 @@ extends Node
 
 var score = 0
 var people_delivered = 0
-var hud
+var coins = 0
+var hud: CanvasLayer
 var route_creator
 var camera
 
@@ -27,6 +28,16 @@ func _process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("pause"):
 		toggle_pause()
+
+func add_coins_from_distance(distance):
+	var points = calc_points(distance)
+	coins = snappedf(coins + points * 10, .1)
+	hud.update_coins_label(coins)
+
+func calc_points(distance):
+	var max_points = 12
+	var scale_factor = 85
+	return max_points / (1 + (distance / scale_factor))
 
 func reset():
 	start_time = 0

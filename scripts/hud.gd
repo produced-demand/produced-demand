@@ -10,6 +10,9 @@ func _ready() -> void:
 func set_score(score):
 	get_node("Info").get_node("Score").get_node("ScoreLabel").text = str(score)
 
+func update_coins_label(coins):
+	get_node("Info").get_node("Coins").get_node("Label").text = str(coins)
+
 func show_end():
 	get_node("End").show()
 

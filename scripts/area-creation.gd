@@ -17,20 +17,14 @@ func _ready() -> void:
 		empty_array.fill(null)
 		areas_array[i] = empty_array
 
-	var position_x = 0 - area_size * 1.5
-	var position_y = 0 - area_size * 1.5
-	
 	for i in range(6, 9):
 		for j in range(6, 9):
 			var area_position = get_position_for_area(i, j)
 			areas_array[i][j] = generate_area(area_position)
-			position_x += area_size
-		position_x = 0 - area_size * 1.5
-		position_y += area_size
 	
 	PeopleGenerator.register_areas_script(self)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Game.paused:
 		return
 	if Game.get_time() > last_tile_added + time_before:
@@ -43,7 +37,7 @@ func add_tile_in_closest_circle():
 	var radius = 2
 	var spots_in_radius
 	var found_spot = false
-	while radius < floor(len(areas_array) / 2):
+	while radius < floor(len(areas_array) / 2.0):
 		spots_in_radius = get_items_in_radius(radius)
 		var empty_spots = spots_in_radius.filter(func(item): return areas_array[item.x][item.y] == null)
 		if len(empty_spots) > 0:
@@ -59,7 +53,7 @@ func add_tile_in_closest_circle():
 
 func get_items_in_radius(radius):
 	var items = []
-	var center = floor(len(areas_array) / 2)
+	var center = floor(len(areas_array) / 2.0)
 	for i in range(center - radius, center + radius + 1):
 		items.append(Vector2(i, center - radius)) # left
 		items.append(Vector2(i, center + radius)) # right

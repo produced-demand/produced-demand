@@ -10,28 +10,26 @@ radius = 10.1814
 radius = 190.946
 
 [node name="Station" type="Area2D"]
-position = Vector2(1, -4.76837e-07)
-scale = Vector2(0.623212, 0.623212)
 script = ExtResource("1_lynhj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(5.51312, 5.51312)
+scale = Vector2(4.09256, 4.09256)
 texture = ExtResource("1_ximm3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.60459, 7.65128e-07)
-scale = Vector2(2.8166, 2.8166)
+scale = Vector2(1.2566, 1.2566)
 shape = SubResource("CircleShape2D_7upvr")
 
 [node name="Label" type="Label" parent="."]
-offset_left = -21.0
-offset_top = 18.0
-offset_right = 19.0
-offset_bottom = 41.0
+offset_left = -20.0
+offset_top = 9.0
+offset_right = 20.0
+offset_bottom = 32.0
 text = "0"
 horizontal_alignment = 1
 
 [node name="Nearby" type="Area2D" parent="."]
+scale = Vector2(0.719999, 0.719999)
 
 [node name="Collider" type="CollisionShape2D" parent="Nearby"]
 shape = SubResource("CircleShape2D_uao8i")
