@@ -17,6 +17,7 @@ var width
 var height
 var radius
 
+var can_move = true
 var data
 
 func _ready():
@@ -31,7 +32,7 @@ func _ready():
 func _process(delta: float) -> void:
 	var mouse_was_down = mouse_down
 
-	if Input.is_action_pressed("left_click"):
+	if Input.is_action_pressed("left_click") and Game.paused:
 		mouse_down = true
 	else:
 		mouse_down = false

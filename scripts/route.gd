@@ -28,19 +28,21 @@ func get_station_count():
 	return len(stations)
 
 func add_point_at_position(point, at_station):
+	var handle = Sprite2D.new()
+	handle.texture = load("res://assets/icons/move.svg")
+	handle.global_position = point
+	handle.scale = Vector2(.2, .2)
+	handle.set_visible(false)
+	add_child(handle)
+
+
 	points.append({
 		"position": point,
-		"atStation": at_station
+		"atStation": at_station,
+		"handle": handle
 	})
 
-	#var marker = Sprite2D.new()
-	#marker.texture = load("res://assets/icon.svg")
-	#marker.global_position = point
-	#add_child(marker)
-	#marker.scale = Vector2(.25, .25)
-
-
-	# add collider - SHOULD BE VISIBLE IN SOME WAY WHEN MOVING (GIVE MOVE CURSOR ICON OR SOMETHING)
+	# add collider
 	var circle_shape = CircleShape2D.new()
 	circle_shape.radius = 20
 
@@ -60,15 +62,17 @@ func add_point_at_position(point, at_station):
 	
 	area.connect("area_entered", _on_bus_entered.bind(len(points) - 1))
 
+func set_handles_visible(set_visible: bool):
+	for point in points:
+		point.handle.set_visible(false)
+
 func point_moved(obj):
 	var new_position: Vector2 = obj.pos
 	var point_index = obj.data
-	#var point_index = get_point_index(point)
-	#print(point)
-	print("var " + str(point_index))
 
 	self.curve.set_point_position(point_index, new_position)
 	visual_line.set_point_position(point_index, new_position)
+	points[point_index].handle.set_global_position(new_position)
 
 func _on_bus_entered(area, point_index):
 	if area.name == "BusCollider":
@@ -76,9 +80,6 @@ func _on_bus_entered(area, point_index):
 		if bus.on_route(self):
 			if self.get_next_point(bus.last_point, bus.reverse) == points[point_index]:
 				bus.set_last_point(points[point_index])
-
-#func get_point_index(point):
-	#return points.find(point, 0)
 
 func get_closest_point(pos):
 	var closest = points[0]

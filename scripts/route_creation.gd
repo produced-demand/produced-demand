@@ -1,6 +1,6 @@
 extends Node2D
 
-var routes: int = 0
+var routes: Array
 
 var creating_route: bool = false
 var current_route
@@ -18,7 +18,7 @@ func _input(event: InputEvent) -> void:
 		if creating_route:
 			var route_finished: bool = add_point_to_route(mouse_position, true)
 			if route_finished:
-				routes += 1
+				routes.append(current_route)
 				add_child(current_route)
 
 				# remove when manually addingroutes += 1 buses is implemented
@@ -35,7 +35,7 @@ func _input(event: InputEvent) -> void:
 				current_line = null
 		else:
 			var is_station_at_position = Stations.get_index_of_station_at_position(mouse_position) != -1
-			if is_station_at_position and routes < Game.get_max_routes():
+			if is_station_at_position and len(routes) < Game.get_max_routes():
 				creating_route = true
 				create_route(mouse_position)
 				Stations.set_route_being_created(true)
@@ -135,4 +135,8 @@ func create_bus(route_is_closed):
 	return follow_path
 
 func get_route_count():
-	return routes
+	return len(routes)
+
+func toggle_route_handles():
+	for route in routes:
+		route.set_handles_visible(Game.paused)

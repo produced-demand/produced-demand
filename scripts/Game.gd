@@ -10,6 +10,7 @@ var camera
 var people_creation_speed = 2000 # interval over which people are created
 
 var paused = true
+
 var start_time
 
 var resource_limits = {
@@ -65,6 +66,7 @@ func start():
 func toggle_pause():
 	paused = not paused
 	hud.get_node("Controls").get_node("PlayPause").get_node("Icon").texture = load("res://assets/icons/play.svg") if paused else load("res://assets/icons/pause.svg")
+	route_creator.toggle_route_handles()
 
 func get_time(): # time game has been played
 	return start_time
