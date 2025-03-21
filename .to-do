@@ -1,22 +1,18 @@
-mechanics
-- weight point score based on travel distance
-
+to-do
 features
 - saving (user://)
-- add buses to routes after creation
-- upgrade station capacity
-- remove buses/stations/routes
-- move routes
-- should not slow/stop at station when full and nobody wants to go there
-
-ux/ux
-- high score screen
 - title screen - choose play/tutorial
-- visual feedback for unable to place stations too close
-- show option as mac alternitve
 
-difficult bugs I don't want to deal with
-- should switch direction at last point on station, not the current ratio implementation
+- add buses to routes after creation
+- remove buses/stations/routes/route points (ctrl + click)
+
+- create new points on route (shift + drag)
+
+- upgrade station capacity
+- pay to increase max stations/routes
+
+bugs
 - double diamond issue - skips station when going through it twice in double pattern
-- buses that go straight down always pass through station
-- bus does not pick up people when stations are too close
+- ➡️ bus does not pick up people when stations are too close
+- handle buses being moved in/out of stations while route moves
+

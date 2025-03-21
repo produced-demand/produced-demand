@@ -48,12 +48,12 @@ func add_point_at_position(point, at_station):
 
 	var area = Area2D.new()
 	add_child(area)
-	#if not at_station:
-		#area.set_script(load("res://scripts/dragging.gd"))
-		#area.set_function(point_moved)
-		#area.set_radius(circle_shape.radius)
-		#area.set_shape(area.Shape.CIRCLE)
-		#area.set_data(len(points) - 1)
+	if not at_station:
+		area.set_script(load("res://scripts/dragging.gd"))
+		area.set_function(point_moved)
+		area.set_radius(circle_shape.radius)
+		area.set_shape(area.Shape.CIRCLE)
+		area.set_data(len(points) - 1)
 
 	var area_collision_shape = CollisionShape2D.new()
 	area_collision_shape.shape = circle_shape
@@ -64,7 +64,7 @@ func add_point_at_position(point, at_station):
 
 func set_handles_visible(set_visible: bool):
 	for point in points:
-		point.handle.set_visible(false)
+		point.handle.set_visible(set_visible)
 
 func point_moved(obj):
 	var new_position: Vector2 = obj.pos
