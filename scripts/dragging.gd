@@ -31,6 +31,7 @@ func _ready():
 
 func _process(delta: float) -> void:
 	var mouse_was_down = mouse_down
+	var with_shift = Input.is_action_pressed("shift")
 
 	if Input.is_action_pressed("left_click") and Game.paused:
 		mouse_down = true

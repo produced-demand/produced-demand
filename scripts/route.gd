@@ -4,6 +4,7 @@ var stations: Array
 var visual_line
 var is_closed
 var points: Array
+var buses: Array
 
 func initilize(visual_line_element):
 	self.visual_line = visual_line_element
@@ -20,6 +21,9 @@ func add_station(station):
 
 func add_bus(bus):
 	add_child(bus)
+
+func register_bus(bus):
+	buses.append(bus)
 
 func has_station(station):
 	return stations.has(station)
@@ -73,6 +77,11 @@ func point_moved(obj):
 	self.curve.set_point_position(point_index, new_position)
 	visual_line.set_point_position(point_index, new_position)
 	points[point_index].handle.set_global_position(new_position)
+	
+	Game.add_route_changed(self)
+	
+	for bus in buses:
+		bus.set_to_progress_ratio()
 
 func _on_bus_entered(area, point_index):
 	if area.name == "BusCollider":
@@ -132,3 +141,7 @@ func get_point_at_position(given_position):
 		if point.position == given_position:
 			return point
 	return null
+
+func route_changed_update_buses():
+	for bus in buses:
+		bus.has_been_moved()

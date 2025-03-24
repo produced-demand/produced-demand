@@ -17,7 +17,7 @@ scale = Vector2(4.09256, 4.09256)
 texture = ExtResource("1_ximm3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(1.2566, 1.2566)
+scale = Vector2(1.8166, 1.8166)
 shape = SubResource("CircleShape2D_7upvr")
 
 [node name="Label" type="Label" parent="."]

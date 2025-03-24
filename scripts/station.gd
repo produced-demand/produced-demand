@@ -63,11 +63,6 @@ func get_people(amount_of_people: int, route):
 			people_to_send.append(person)
 			people.remove_at(person_index)
 			amount_of_people -= 1
-		# try this a final time then remove
-		#else:
-			#print("dream: " + str(dream) + " - " + str(route.stations))
-			#print(dream in route.stations)
-			#print("person rejected unjustly")
 
 	update_occupants_label()
 	return people_to_send

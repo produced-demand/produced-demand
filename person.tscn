@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bisiolm2xfwd4"]
 
-[ext_resource type="Script" uid="uid://dt447oj7t1xlu" path="res://scripts/person_movement.gd" id="1_ewpfn"]
+[ext_resource type="Script" uid="uid://dt447oj7t1xlu" path="res://scripts/person.gd" id="1_ewpfn"]
 [ext_resource type="Texture2D" uid="uid://do2aefig26sgc" path="res://assets/phil.png" id="2_ctg05"]
 [ext_resource type="Texture2D" uid="uid://btkkc2f5x2q6v" path="res://assets/phil_jump.png" id="3_v5img"]
 [ext_resource type="Texture2D" uid="uid://dtlsqo5hao1ww" path="res://assets/bill.png" id="4_hvl02"]

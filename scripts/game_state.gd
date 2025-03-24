@@ -10,6 +10,7 @@ var camera
 var people_creation_speed = 2000 # interval over which people are created
 
 var paused = true
+var routes_changed: Array
 
 var start_time
 
@@ -36,7 +37,7 @@ func add_coins_from_distance(distance):
 	hud.update_coins_label(coins)
 
 func calc_points(distance):
-	var max_points = 12
+	var max_points = 8
 	var scale_factor = 85
 	return max_points / (1 + (distance / scale_factor))
 
@@ -67,6 +68,10 @@ func toggle_pause():
 	paused = not paused
 	hud.get_node("Controls").get_node("PlayPause").get_node("Icon").texture = load("res://assets/icons/play.svg") if paused else load("res://assets/icons/pause.svg")
 	route_creator.toggle_route_handles()
+	if not paused:
+		for route in routes_changed:
+			route.route_changed_update_buses()
+		routes_changed.clear()
 
 func get_time(): # time game has been played
 	return start_time
@@ -85,3 +90,7 @@ func register_camera(script):
 
 func get_route_count():
 	return route_creator.get_route_count()
+
+func add_route_changed(route):
+	if not route in routes_changed:
+		routes_changed.append(route)

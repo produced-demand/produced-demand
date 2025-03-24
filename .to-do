@@ -1,18 +1,25 @@
 to-do
 features
-- saving (user://)
+- saving (user://, packed scenes, resource)
+   - interface on title screen to choose between saves, delete saves
 - title screen - choose play/tutorial
 
 - add buses to routes after creation
 - remove buses/stations/routes/route points (ctrl + click)
 
-- create new points on route (shift + drag)
+- * create new points on route (shift + drag)
 
 - upgrade station capacity
-- pay to increase max stations/routes
+- ➡️ pay to increase max stations/routes
 
 bugs
 - double diamond issue - skips station when going through it twice in double pattern
-- ➡️ bus does not pick up people when stations are too close
-- handle buses being moved in/out of stations while route moves
+- bus can be pulled away from non-end station by moving route points
 
+-- likely caused by incorrect endpoint behavior --
+- bus sometimes runs through end points
+- bus occasionaly gets stuck at end point
+- moving point caused circle route to always miss station
+
+- pausing causing buses to stop permantly
+- placing route points on top of each other stops bus permantly

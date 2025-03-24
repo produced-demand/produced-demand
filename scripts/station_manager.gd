@@ -34,14 +34,16 @@ func can_add_station(new_position):
 	else:
 		return false
 
+# used when placing a station nearby
 func station_at(given_position):
 	for station in stations:
 		var diff_x = abs(station.global_position.x - given_position.x)
 		var diff_y = abs(station.global_position.y - given_position.y)
-		if diff_x < 120 and diff_y < 120:
+		if diff_x < 125 and diff_y < 125:
 			return true
 	return false
 
+# use to see if literally in station range
 func get_station_at(given_position):
 	for station in stations:
 		var diff_x = abs(station.global_position.x - given_position.x)
