@@ -41,7 +41,7 @@ func add_point_at_position(point, at_station):
 
 
 	points.append({
-		"position": point,
+		"position": handle.global_position,
 		"atStation": at_station,
 		"handle": handle
 	})
@@ -76,6 +76,7 @@ func point_moved(obj):
 
 	self.curve.set_point_position(point_index, new_position)
 	visual_line.set_point_position(point_index, new_position)
+	points[point_index].position = new_position
 	points[point_index].handle.set_global_position(new_position)
 	
 	Game.add_route_changed(self)

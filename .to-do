@@ -23,3 +23,8 @@ bugs
 
 - pausing causing buses to stop permantly
 - placing route points on top of each other stops bus permantly
+
+- wait time runs during pause
+
+
+MAY HAVE FOUND ERROR - MOVES ACROSS POINTS WHEN CHANGING ROUTE, MAY CAUSE ISSUES WITH LAST-POINT
