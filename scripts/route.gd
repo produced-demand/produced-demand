@@ -36,7 +36,7 @@ func add_point_at_position(point, at_station):
 	handle.texture = load("res://assets/icons/move.svg")
 	handle.global_position = point
 	handle.scale = Vector2(.2, .2)
-	handle.set_visible(false)
+	handle.set_visible(true)
 	add_child(handle)
 
 

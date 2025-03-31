@@ -1,10 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://cfduee8lnq0v2"]
+[gd_scene load_steps=21 format=3 uid="uid://cfduee8lnq0v2"]
 
 [ext_resource type="Script" uid="uid://lrtvsn5h4jut" path="res://scripts/hud.gd" id="1_oxnlw"]
+[ext_resource type="Script" uid="uid://c8hx6hii33s8o" path="res://resources_display.gd" id="2_41shd"]
 [ext_resource type="Texture2D" uid="uid://b11wko8qeb1hi" path="res://assets/station.png" id="2_q4d68"]
 [ext_resource type="Texture2D" uid="uid://c0aiihk67lhda" path="res://assets/icons/replay.svg" id="3_8w138"]
+[ext_resource type="Texture2D" uid="uid://cobt2f6atpkyf" path="res://assets/crate.png" id="3_cb8im"]
 [ext_resource type="Texture2D" uid="uid://do2aefig26sgc" path="res://assets/phil.png" id="4_4x6j7"]
 [ext_resource type="Texture2D" uid="uid://mpigxyn284ih" path="res://assets/cancel.svg" id="4_amnxb"]
+[ext_resource type="Texture2D" uid="uid://bol8c4nb3b23n" path="res://assets/icons/plus.svg" id="4_d5xqv"]
 [ext_resource type="Texture2D" uid="uid://sby4pyk41bm0" path="res://assets/info.png" id="4_wrmd3"]
 [ext_resource type="Texture2D" uid="uid://cduiykqpr8xel" path="res://assets/coin.png" id="5_qrimw"]
 [ext_resource type="Texture2D" uid="uid://dt2njfqg3ajt6" path="res://assets/icons/zoom_in.svg" id="6_s3kkg"]
@@ -13,6 +16,10 @@
 [ext_resource type="Texture2D" uid="uid://cglqydyhkxs8a" path="res://assets/icons/pause.svg" id="8_1voem"]
 [ext_resource type="Texture2D" uid="uid://badah0rd8s0we" path="res://assets/icons/win.png" id="9_x6is5"]
 [ext_resource type="Texture2D" uid="uid://dtlsqo5hao1ww" path="res://assets/bill.png" id="10_d5xqv"]
+[ext_resource type="FontFile" uid="uid://bpp2n264ultcs" path="res://assets/fonts/VinaSans-Regular.ttf" id="17_ptsyy"]
+[ext_resource type="Texture2D" uid="uid://o0fsw6h0lkje" path="res://assets/icons/play.svg" id="18_kxho0"]
+[ext_resource type="Texture2D" uid="uid://cgf2c8x4xhtqd" path="res://assets/icons/documentation.svg" id="19_fsk4d"]
+[ext_resource type="Texture2D" uid="uid://btkkc2f5x2q6v" path="res://assets/phil_jump.png" id="20_fsk4d"]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_oxnlw")
@@ -22,14 +29,15 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("2_41shd")
 
-[node name="ColorRect" type="ColorRect" parent="Resources"]
+[node name="CrateBackground" type="TextureRect" parent="Resources"]
 layout_mode = 0
-offset_left = 946.0
-offset_right = 986.0
+offset_left = 1010.0
+offset_right = 1050.0
 offset_bottom = 40.0
-scale = Vector2(5.16, 2.6)
-color = Color(0.929715, 0.929715, 0.929715, 1)
+scale = Vector2(3.55998, 2.52)
+texture = ExtResource("3_cb8im")
 
 [node name="Stations" type="Control" parent="Resources"]
 anchors_preset = 0
@@ -38,21 +46,21 @@ offset_right = 915.0
 
 [node name="Icon" type="TextureRect" parent="Resources/Stations"]
 layout_mode = 0
-offset_left = 168.0
+offset_left = 178.0
 offset_top = 7.0
-offset_right = 184.0
+offset_right = 194.0
 offset_bottom = 23.0
 scale = Vector2(2.46534, 2.46534)
 texture = ExtResource("2_q4d68")
 
 [node name="Label" type="Label" parent="Resources/Stations"]
 layout_mode = 0
-offset_left = 48.0
-offset_right = 133.0
+offset_left = 112.0
+offset_right = 197.0
 offset_bottom = 50.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 36
-text = " 2/10"
+text = "0"
 
 [node name="Routes" type="Control" parent="Resources"]
 layout_mode = 3
@@ -73,12 +81,82 @@ texture = ExtResource("6_up8ug")
 
 [node name="Label" type="Label" parent="Resources/Routes"]
 layout_mode = 0
-offset_left = 64.0
-offset_right = 149.0
+offset_left = 112.0
+offset_right = 197.0
 offset_bottom = 50.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 36
-text = "0/8"
+text = "0"
+
+[node name="BuyStation" type="Control" parent="Resources"]
+anchors_preset = 0
+offset_left = 48.0
+offset_right = 88.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Resources/BuyStation"]
+layout_mode = 0
+offset_left = 831.0
+offset_right = 916.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0.355314, 0.355314, 0.355314, 1)
+theme_override_font_sizes/font_size = 26
+text = "20"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="Resources/BuyStation"]
+layout_mode = 0
+offset_left = 916.0
+offset_top = 19.0
+offset_right = 956.0
+offset_bottom = 59.0
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("5_qrimw")
+
+[node name="Button" type="Button" parent="Resources/BuyStation"]
+layout_mode = 0
+offset_left = 935.0
+offset_top = 18.0
+offset_right = 993.0
+offset_bottom = 76.0
+scale = Vector2(0.296157, 0.296157)
+icon = ExtResource("4_d5xqv")
+icon_alignment = 1
+
+[node name="BuyRoute" type="Control" parent="Resources"]
+anchors_preset = 0
+offset_left = 48.0
+offset_right = 88.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Resources/BuyRoute"]
+offset_left = 831.0
+offset_top = 46.0
+offset_right = 916.0
+offset_bottom = 96.0
+theme_override_colors/font_color = Color(0.355314, 0.355314, 0.355314, 1)
+theme_override_font_sizes/font_size = 26
+text = "200"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="Resources/BuyRoute"]
+offset_left = 916.0
+offset_top = 65.0
+offset_right = 956.0
+offset_bottom = 105.0
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("5_qrimw")
+
+[node name="Button" type="Button" parent="Resources/BuyRoute"]
+offset_left = 935.0
+offset_top = 64.0
+offset_right = 993.0
+offset_bottom = 122.0
+scale = Vector2(0.296157, 0.296157)
+icon = ExtResource("4_d5xqv")
+icon_alignment = 1
 
 [node name="Indicators" type="Control" parent="."]
 layout_mode = 3
@@ -214,7 +292,7 @@ offset_bottom = 40.0
 scale = Vector2(1.28, 1.28)
 texture = ExtResource("7_vm5a1")
 
-[node name="End" type="Control" parent="."]
+[node name="LoseEnd" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -228,7 +306,7 @@ offset_bottom = -324.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="End"]
+[node name="ColorRect" type="ColorRect" parent="LoseEnd"]
 layout_mode = 0
 offset_top = -0.99999
 offset_right = 40.0
@@ -236,7 +314,7 @@ offset_bottom = 39.0
 scale = Vector2(28.8, 16.24)
 color = Color(1, 0.172549, 0, 1)
 
-[node name="Over" type="Label" parent="End"]
+[node name="Over" type="Label" parent="LoseEnd"]
 layout_mode = 0
 offset_left = 392.0
 offset_right = 465.0
@@ -245,7 +323,7 @@ scale = Vector2(5, 5)
 theme_override_font_sizes/font_size = 70
 text = "😞"
 
-[node name="TextureRect" type="TextureRect" parent="End"]
+[node name="TextureRect" type="TextureRect" parent="LoseEnd"]
 layout_mode = 0
 offset_left = 433.0
 offset_top = 489.0
@@ -254,7 +332,7 @@ offset_bottom = 529.0
 scale = Vector2(3.30178, 3.30178)
 texture = ExtResource("2_q4d68")
 
-[node name="HowManyOver" type="Label" parent="End"]
+[node name="HowManyOver" type="Label" parent="LoseEnd"]
 layout_mode = 0
 offset_left = 465.0
 offset_top = 569.0
@@ -263,7 +341,7 @@ offset_bottom = 622.0
 theme_override_font_sizes/font_size = 38
 text = "120"
 
-[node name="ComparedToMax" type="Label" parent="End"]
+[node name="ComparedToMax" type="Label" parent="LoseEnd"]
 layout_mode = 0
 offset_left = 583.0
 offset_top = 569.0
@@ -272,7 +350,7 @@ offset_bottom = 622.0
 theme_override_font_sizes/font_size = 38
 text = "> 120"
 
-[node name="PlayAgainButton" type="Button" parent="End"]
+[node name="PlayAgainButton" type="Button" parent="LoseEnd"]
 layout_mode = 0
 offset_left = 530.0
 offset_top = 390.0
@@ -280,7 +358,7 @@ offset_right = 610.0
 offset_bottom = 470.0
 mouse_default_cursor_shape = 2
 
-[node name="Sprite2D" type="TextureRect" parent="End/PlayAgainButton"]
+[node name="Sprite2D" type="TextureRect" parent="LoseEnd/PlayAgainButton"]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 5.0
@@ -456,10 +534,177 @@ offset_bottom = 551.0
 scale = Vector2(1.77453, 1.77453)
 text = "->"
 
+[node name="TitleScreen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="TitleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(40.6402, 7.48588)
+color = Color(0.856439, 0.877222, 0.934681, 1)
+
+[node name="TitleShadow" type="RichTextLabel" parent="TitleScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -318.5
+offset_top = -42.0
+offset_right = 326.5
+offset_bottom = 342.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.572988, 0.572988, 0.572988, 1)
+theme_override_constants/line_separation = -40
+theme_override_fonts/normal_font = ExtResource("17_ptsyy")
+theme_override_font_sizes/normal_font_size = 180
+text = "Produced
+Demand
+"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="RichTextLabel" parent="TitleScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -322.5
+offset_top = -46.0
+offset_right = 322.5
+offset_bottom = 338.0
+grow_horizontal = 2
+theme_override_constants/line_separation = -40
+theme_override_fonts/normal_font = ExtResource("17_ptsyy")
+theme_override_font_sizes/normal_font_size = 180
+text = "Produced
+Demand
+"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="VBoxContainer" parent="TitleScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -111.0
+offset_top = -257.0
+offset_right = -13.0
+offset_bottom = -188.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(2.16546, 2.16546)
+
+[node name="Play" type="Button" parent="TitleScreen/Control"]
+layout_mode = 2
+text = "Play"
+icon = ExtResource("18_kxho0")
+
+[node name="Tutorial" type="Button" parent="TitleScreen/Control"]
+layout_mode = 2
+text = "Tutorial"
+icon = ExtResource("19_fsk4d")
+
+[node name="CreditsShadow" type="RichTextLabel" parent="TitleScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -193.0
+offset_top = -48.0
+offset_right = 436.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.615291, 0.615291)
+theme_override_colors/default_color = Color(0.233925, 0.233925, 0.233925, 1)
+theme_override_fonts/normal_font = ExtResource("17_ptsyy")
+theme_override_font_sizes/normal_font_size = 50
+text = "Copyleft 2025 Hamza Nasher-Alneam"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits" type="RichTextLabel" parent="TitleScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -195.0
+offset_top = -50.0
+offset_right = 434.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.615291, 0.615291)
+theme_override_fonts/normal_font = ExtResource("17_ptsyy")
+theme_override_font_sizes/normal_font_size = 50
+text = "Copyleft 2025 Hamza Nasher-Alneam"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="TitleScreen"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 40.0
+offset_right = 234.0
+offset_bottom = 136.0
+texture = ExtResource("6_up8ug")
+
+[node name="TextureRect2" type="TextureRect" parent="TitleScreen"]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 212.0
+offset_right = 900.0
+offset_bottom = 252.0
+scale = Vector2(2.88, 2.88)
+texture = ExtResource("2_q4d68")
+
+[node name="Coin" type="Sprite2D" parent="TitleScreen"]
+position = Vector2(1000, 506)
+scale = Vector2(6.6, 6.6)
+texture = ExtResource("5_qrimw")
+
+[node name="PhilJump" type="Sprite2D" parent="TitleScreen"]
+position = Vector2(128.149, 548.149)
+scale = Vector2(3.75999, 3.75999)
+texture = ExtResource("20_fsk4d")
+
+[node name="Crate" type="Sprite2D" parent="TitleScreen"]
+position = Vector2(126.149, 429.149)
+scale = Vector2(3.69682, 3.69682)
+texture = ExtResource("3_cb8im")
+
+[connection signal="pressed" from="Resources/BuyStation/Button" to="Resources" method="_on_buy_station_pressed"]
+[connection signal="pressed" from="Resources/BuyRoute/Button" to="Resources" method="_on_buy_route_pressed"]
 [connection signal="pressed" from="Indicators/CreatingRouteIndicator/CancelRouteCreation" to="." method="_on_cancel_route_button_pressed"]
 [connection signal="pressed" from="Controls/PlayPause" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="Controls/ZoomIn" to="." method="_on_zoom_in_pressed"]
 [connection signal="pressed" from="Controls/ZoomOut" to="." method="_on_zoom_out_pressed"]
-[connection signal="pressed" from="End/PlayAgainButton" to="." method="_on_play_again_pressed"]
+[connection signal="pressed" from="LoseEnd/PlayAgainButton" to="." method="_on_play_again_pressed"]
 [connection signal="pressed" from="WinEnd/PlayAgainButton" to="." method="_on_play_again_pressed"]
 [connection signal="pressed" from="Start/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="TitleScreen/Control/Play" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="TitleScreen/Control/Tutorial" to="." method="_on_start_tutorial_pressed"]

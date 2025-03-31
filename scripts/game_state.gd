@@ -15,11 +15,17 @@ var routes_changed: Array
 var start_time
 
 var resource_limits = {
-	"max_stations": 10,
-	"max_routes": 8
+	"max_stations": 4,
+	"max_routes": 4
+}
+var resource_cost_multiplier = 1.05
+var resource_costs = {
+	"station": 200,
+	"route": 300
 }
 
-var max_people_at_station = 120
+var max_people_at_station = 120 # when adding upgraded stations, this will need to be per-station
+
 
 func _ready() -> void:
 	start_time = 0
@@ -37,7 +43,7 @@ func add_coins_from_distance(distance):
 	hud.update_coins_label(coins)
 
 func calc_points(distance):
-	var max_points = 8
+	var max_points = 6
 	var scale_factor = 85
 	return max_points / (1 + (distance / scale_factor))
 
@@ -48,7 +54,7 @@ func reset():
 	Stations.reset()
 
 func end_game(people_overrun_by):
-	hud.get_node("End").get_node("HowManyOver").text = str(people_overrun_by)
+	hud.get_node("LoseEnd").get_node("HowManyOver").text = str(people_overrun_by)
 	hud.show_end()
 	paused = true
 
@@ -94,3 +100,23 @@ func get_route_count():
 func add_route_changed(route):
 	if not route in routes_changed:
 		routes_changed.append(route)
+
+
+# buying new stations/routes
+func can_buy_station():
+	if coins > resource_costs.station:
+		return true
+func can_buy_route():
+	if coins > resource_costs.route:
+		return true
+
+func buy_station():
+	coins -= resource_costs.station
+	resource_costs.station = round(resource_costs.station * resource_cost_multiplier)
+	hud.update_coins_label(coins)
+	resource_limits.max_stations += 1
+func buy_route():
+	coins -= resource_costs.route
+	resource_costs.route = round(resource_costs.route * resource_cost_multiplier)
+	hud.update_coins_label(coins)
+	resource_limits.max_routes += 1

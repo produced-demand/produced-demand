@@ -165,6 +165,13 @@ func set_last_point(point):
 		if route.is_end_point(point):
 			print("starting end behaviour")
 			has_reached_end = true
+	elif Game.paused:
+		last_point = point
+		print("set last point")
+		if route.is_end_point(point):
+			print("starting end behaviour")
+			has_reached_end = true
+		# bus is passing through a point because of point movement. if it before last_point, 
 
 func has_been_moved():
 	# NEED TO DO SOMETHING ABOUT LAST-POINT HERE
