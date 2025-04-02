@@ -71,6 +71,14 @@ func set_handles_visible(set_visible: bool):
 		point.handle.set_visible(set_visible)
 
 func point_moved(obj):
+	# for creating new route points (will also need to update last_item)
+	var with_shift = Input.is_action_pressed("shift")
+	
+	if with_shift: # should not run every time
+		# insert new point
+		pass
+	
+	
 	var new_position: Vector2 = obj.pos
 	var point_index = obj.data
 

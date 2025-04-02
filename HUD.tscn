@@ -131,6 +131,7 @@ offset_right = 88.0
 offset_bottom = 40.0
 
 [node name="Label" type="Label" parent="Resources/BuyRoute"]
+layout_mode = 0
 offset_left = 831.0
 offset_top = 46.0
 offset_right = 916.0
@@ -142,6 +143,7 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Icon" type="TextureRect" parent="Resources/BuyRoute"]
+layout_mode = 0
 offset_left = 916.0
 offset_top = 65.0
 offset_right = 956.0
@@ -150,6 +152,7 @@ scale = Vector2(0.36, 0.36)
 texture = ExtResource("5_qrimw")
 
 [node name="Button" type="Button" parent="Resources/BuyRoute"]
+layout_mode = 0
 offset_left = 935.0
 offset_top = 64.0
 offset_right = 993.0
